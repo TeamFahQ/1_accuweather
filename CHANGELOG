@@ -1,0 +1,26 @@
+2019-10-13:
+Pushed everything to a brand new repository, the old one had been massacred beyond recognition. I also changed the name of the script and the script's folder to accuweather and Accuweather_conky_script respectively. The number naming scheme made no sense because problems would arise when new scripts where created or old ones abandoned. It's also a great distraction from the fact that I suck at git.
+
+2019-10-10:
+The good news: Fixed the visibility in the curr_cond file. No issue with me with the forecast_0.png.
+The bad news: The user agent that used to work with expressvpn doesn't do a thing any more. I've also screwed up the repository a bit but I think I've managed to bring it back to its former state (mostly). Please report any abnormalities you encounter.
+
+2019-10-8:
+Curr_cond file in the Accuweather script corrected.
+
+2019-10-7:
+Hourly_raw2 file corrected again.
+Thanks to loutch for his feedback.
+
+2019-10-6:
+Tiny correction to the Accuweather script, thanks to loutch for reporting the bug that caused the hourly_raw1 and hourly_raw2 files to be the same. Script corrected and pushed to git.
+You can either pull it or go to line 440 of the script and change
+
+2019-10-2: Changed from w3m to wget again, with a twist...
+
+2019-9-9:Final Release
+
+2019-9:
+-Fixed some conkyrc files which showed the wrong temperatures and forecast phrases.
+-Changed the conkyrc files to use a color code, ie ${color1} and not a specific color.
+-Sometimes the script downloads the forecast for more than 15 days. New version cuts down to 15 days.

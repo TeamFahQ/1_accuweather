@@ -1,0 +1,111 @@
+conky.config = {
+-- Create own window instead of using desktop (required in nautilus)
+	own_window = true,
+	own_window_type = 'override',
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,below,skip_taskbar,skip_pager',
+	own_window_colour = 'brown',
+
+-- Use double buffering (reduces flicker, may not work for everyone)
+	double_buffer = true,
+
+-- fiddle with window
+	use_spacer = 'right',
+	use_xft = true,
+
+-- Update interval in seconds
+	update_interval = 3.0,
+
+-- Minimum size of text area
+	minimum_width = 280, minimum_height = 500,
+	maximum_width = 280,
+
+	override_utf8_locale = true,
+
+-- Draw shades?
+	draw_shades = true,
+
+-- Text stuff
+	draw_outline = true,-- amplifies text if yes
+	draw_borders = false,
+--font freesans -12
+	font = 'Arial:size=9',
+	uppercase = false,-- set to yes if you want all text to be in uppercase
+
+-- Stippled borders?
+	stippled_borders = 3,
+
+-- border margins
+	border_inner_margin = 9,
+	border_outer_margin = 0,
+
+-- border width
+	border_width = 10,
+
+-- Default colors and also border colors, grey90 == #e5e5e5
+	default_color = '#cbcbcb',
+	color1 = '#8e8e8e',
+
+-- Text alignment, other possible values are commented
+--alignment top_left
+	alignment = 'top_right',
+--alignment bottom_left
+--alignment bottom_right
+
+-- Gap between borders of screen and text
+	gap_x = 10,
+	gap_y = 30,
+
+-- stuff after 'TEXT' will be formatted on screen
+
+};
+
+conky.text = [[
+${color1}WEATHER ${hr 2}$color${texeci 600 bash $HOME/Accuweather_conky_script/accuweather -f}
+
+${font conkyweather:size=40}${texeci 600  sed -n '22p' $HOME/Accuweather_conky_script/curr_cond}${font}${goto 75}${voffset -40}CURRENTLY: ${texeci 600 sed -n '2p' $HOME/Accuweather_conky_script/curr_cond}°
+${goto 75}${texeci 600 sed -n '4p' $HOME/Accuweather_conky_script/curr_cond|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '601p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '23p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '7p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '28p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '11p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '602p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '63p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '47p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '68p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '51p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '603p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '103p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '87p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '108p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '91p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '604p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '143p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '127p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '148p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '131p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '605p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '183p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '167p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '188p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '171p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '606p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '223p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '207p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '228p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '211p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '607p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '263p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '247p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '268p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '251p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '608p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '303p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '287p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '308p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '291p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '609p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '343p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '327p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '348p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '331p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+${font conkyweather:size=40}${texeci 600  sed -n '610p' $HOME/Accuweather_conky_script/daily_forecast}${font}${goto 75}${voffset -40}${texeci 600 sed -n '383p' $HOME/Accuweather_conky_script/daily_forecast|tr a-z A-Z}: ${texeci 600 sed -n '367p' $HOME/Accuweather_conky_script/daily_forecast}°/${texeci 600 sed -n '388p' $HOME/Accuweather_conky_script/daily_forecast}°
+${goto 75}${texeci 600 sed -n '371p' $HOME/Accuweather_conky_script/daily_forecast|fold -w30}
+
+
+
+]];
