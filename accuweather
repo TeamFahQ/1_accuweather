@@ -318,29 +318,29 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 
 	#current conditions
 	if [[ -s $HOME/Accuweather_conky_script/curr_cond_raw ]]; then
-		sed -i '/var sunMoon\|var curCon/!d' $HOME/Accuweather_conky_script/curr_cond_raw
-		sed -i -e 's/^.*extended":{"//' -e 's/^.*moon":{"//' -e 's/,/:/g' -e 's/{"category.*value":/"/' -e 's/}:/":/g' -e 's/icon":/icon":"/' -e 's/:"now/":"now/' -e 's/"};//' -e 's/windDeg":/windDeg":"/' -e 's/°//g' -e 's/":"sun":{/:/' -e 's/"}};//' $HOME/Accuweather_conky_script/curr_cond_raw
-		awk 'FNR==2 { print $38 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $46 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $44 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $42 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $34 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw|awk '{ print $3 }' >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $34 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw|awk '{ print $1, $2 }' >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $10 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $26 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $30 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $4 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $2 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $6 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==2 { print $32 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==1 { print $10 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==1 { print $12 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==1 { print $8 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
+		sed '/>Current Weather</,/>See Hourly</!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i '/\.svg"\|&#xB0\|phrase\|Humidity\|UV Index\|Cloud Cover\|Pressure\|Dew Point\|Visibility\|Wind/!d' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i -e 's/^.*weathericons\///' -e 's/\.svg.*$//' -e 's/&#xB0.*$//g' -e 's/^[ ,\t]*//g' -e 's/^.*phrase">//' -e 's/<\/div>//' -e 's/: /\n/g' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i -e '20s/\(.*\) /\1\n/' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -n 1,4p $HOME/Accuweather_conky_script/curr_cond_temp > $HOME/Accuweather_conky_script/curr_cond
+		sed -n 21p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 20p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 6p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 12p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 8p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 10p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		echo 'EMPTY LINE FOR COMPATIBILITY WITH THE OLD CONKYRC FILES' >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==1 { print $4 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==1 { print $6 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
-		awk 'FNR==1 { print $2 }' FS="\":\"" $HOME/Accuweather_conky_script/curr_cond_raw >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 14p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 16p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+
+		sed '/>Sunrise\/Sunset</,/>Temperature History</!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i '/AM\|PM\|hr/!d' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i -e 's/^.*content">//g' -e 's/^[ ,\t]*//g' -e 's/<\/span>//g' -e 's/ hr//g' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -n 1,3p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		echo 'EMPTY LINE FOR COMPATIBILITY WITH THE OLD CONKYRC FILES' >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 4,6p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		echo 'EMPTY LINE FOR COMPATIBILITY WITH THE OLD CONKYRC FILES' >> $HOME/Accuweather_conky_script/curr_cond
+		rm $HOME/Accuweather_conky_script/curr_cond_temp
 
 	    image=$(sed -n 1p $HOME/Accuweather_conky_script/curr_cond)
 	    echo $(test_image $image) >> $HOME/Accuweather_conky_script/curr_cond
