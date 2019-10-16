@@ -11,7 +11,7 @@ weather_conky_launch_command="conky -b"
 #####################################
 #address="http://www.accuweather.com/en/ar/buenos-aires/7894/weather-forecast/7894"
 #address="https://www.accuweather.com/en/us/hutto-tx/78634/weather-forecast/2110192"
-address="http://www.accuweather.com/en/gr/kastoria/178682/weather-forecast/178682"
+address="https://www.accuweather.com/en/gr/kastoria/178682/weather-forecast/178682"
 #address="http://www.accuweather.com/en/de/lichtenstein/09350/weather-forecast/171261"
 
 
@@ -224,7 +224,10 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 		hours=$(echo $1|awk -F ":| " '{print $1}')
 		minutes=$(echo $1|awk -F ":| " '{print $2}')
 		am_or_pm=$(echo $1|awk -F ":| " '{print $3}')
-		if [[ $am_or_pm == AM ]]; then
+		if [[ $am_or_pm == "" ]]; then
+			echo $1
+			return 0
+		elif [[ $am_or_pm == AM ]]; then
 			if (( $hours < 10 )); then
 				hours_24=0$hours
 			fi
@@ -304,10 +307,10 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 	}
 
 	curr_addr="$(echo $address|sed 's/weather-forecast.*$//')"current-weather/"$last_number"
-	wget -U "Oh hi Mark!" -O $HOME/Accuweather_conky_script/curr_cond_raw "$curr_addr"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0' -H 'Accept-Language: en-US,en;q=0.5' --compressed -o $HOME/Accuweather_conky_script/curr_cond_raw "$curr_addr"
 
 	daily_addr="$(echo $address|sed 's/weather-forecast.*$//')"daily-weather-forecast/"$last_number"
-	wget -U "Oh hi Mark!" -O $HOME/Accuweather_conky_script/daily_forecast "$daily_addr"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0' -H 'Accept-Language: en-US,en;q=0.5' --compressed -o $HOME/Accuweather_conky_script/daily_forecast "$daily_addr"
 
 	if [[ $forecast2015 == 1 ]]; then
 		rm $HOME/Accuweather_conky_script/forecast_2015/forecast_*.png
@@ -318,8 +321,8 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 
 	#current conditions
 	if [[ -s $HOME/Accuweather_conky_script/curr_cond_raw ]]; then
-		sed '/>Current Weather</,/>See Hourly</!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
-		sed -i '/\.svg"\|&#xB0\|phrase\|Humidity\|UV Index\|Cloud Cover\|Pressure\|Dew Point\|Visibility\|Wind/!d' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed '/conditions-card card panel conditions/,/class="card-button "/!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i -e '/\.svg"\|&#xB0\|phrase\|: /!d' -e '/style="transform: /d' $HOME/Accuweather_conky_script/curr_cond_temp
 		sed -i -e 's/^.*weathericons\///' -e 's/\.svg.*$//' -e 's/&#xB0.*$//g' -e 's/^[ ,\t]*//g' -e 's/^.*phrase">//' -e 's/<\/div>//' -e 's/: /\n/g' $HOME/Accuweather_conky_script/curr_cond_temp
 		sed -i -e '20s/\(.*\) /\1\n/' $HOME/Accuweather_conky_script/curr_cond_temp
 		sed -n 1,4p $HOME/Accuweather_conky_script/curr_cond_temp > $HOME/Accuweather_conky_script/curr_cond
@@ -333,8 +336,8 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 		sed -n 14p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		sed -n 16p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 
-		sed '/>Sunrise\/Sunset</,/>Temperature History</!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
-		sed -i '/AM\|PM\|hr/!d' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed '/<div class="panel-1"><div class="sunrise">/,/<div class="temp-history">/!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i '/:[0-9][0-9]/!d' $HOME/Accuweather_conky_script/curr_cond_temp
 		sed -i -e 's/^.*content">//g' -e 's/^[ ,\t]*//g' -e 's/<\/span>//g' -e 's/ hr//g' $HOME/Accuweather_conky_script/curr_cond_temp
 		sed -n 1,3p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		echo 'EMPTY LINE FOR COMPATIBILITY WITH THE OLD CONKYRC FILES' >> $HOME/Accuweather_conky_script/curr_cond
@@ -436,8 +439,8 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 
 	hourly_addr1="$(echo $address|sed 's/weather-forecast.*$//')"hourly-weather-forecast/"$last_number"
 	hourly_addr2="$(echo $address|sed 's/weather-forecast.*$//')"hourly-weather-forecast/"$last_number"?day=2
-	wget -U "Oh hi Mark!" -O $HOME/Accuweather_conky_script/hourly_raw1 "$hourly_addr1"
-	wget -U "Oh hi Mark!" -O $HOME/Accuweather_conky_script/hourly_raw2 "$hourly_addr2"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0' -H 'Accept-Language: en-US,en;q=0.5' --compressed -o $HOME/Accuweather_conky_script/hourly_raw1 "$hourly_addr1"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0' -H 'Accept-Language: en-US,en;q=0.5' --compressed -o $HOME/Accuweather_conky_script/hourly_raw2 "$hourly_addr2"
 
 	if [[ -s $HOME/Accuweather_conky_script/hourly_raw1 && -s $HOME/Accuweather_conky_script/hourly_raw2 ]]; then
 		sed -i '/var hourlyForecast/!d' $HOME/Accuweather_conky_script/hourly_raw1

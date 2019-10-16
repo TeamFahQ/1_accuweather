@@ -1,3 +1,6 @@
+2019-10-17:
+Made the script (current weather section) a bit more international. I've also switched to curl and solved the VPN problem, at least with Expressvpn that is.
+
 2019-10-14:
 Corrected the curr_cond file after Accuweather's new tricks. Unfortunately, we've lost the Ceiling value from the current weather conditions, I hope it wasn't too important, whatever it was.
 
