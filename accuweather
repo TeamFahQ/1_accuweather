@@ -336,9 +336,25 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 		sed -n 14p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		sed -n 16p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 
+		moonrise=1
+		moonset=1	
 		sed '/<div class="panel-1"><div class="sunrise">/,/<div class="temp-history">/!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
+		if (( $(grep '>Moonrise:<' /$HOME/Accuweather_conky_script/curr_cond_temp|wc -l) == 0 )); then
+			moonrise=0
+		fi
+		if (( $(grep '>Moonset:<' /$HOME/Accuweather_conky_script/curr_cond_temp|wc -l) == 0 )); then
+			moonset=0
+		fi
 		sed -i '/:[0-9][0-9]/!d' $HOME/Accuweather_conky_script/curr_cond_temp
 		sed -i -e 's/^.*content">//g' -e 's/^[ ,\t]*//g' -e 's/<\/span>//g' -e 's/ hr//g' $HOME/Accuweather_conky_script/curr_cond_temp
+		if (( $moonrise == 0 )); then
+			sed -i '3s/$/\n-/' $HOME/Accuweather_conky_script/curr_cond_temp
+			sed -i '5s/$/\n-/' $HOME/Accuweather_conky_script/curr_cond_temp
+		fi
+		if (( $moonset == 0 )); then
+			sed -i '4s/$/\n-/' $HOME/Accuweather_conky_script/curr_cond_temp
+			sed -i '5s/$/\n-/' $HOME/Accuweather_conky_script/curr_cond_temp
+		fi
 		sed -n 1,3p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		echo 'EMPTY LINE FOR COMPATIBILITY WITH THE OLD CONKYRC FILES' >> $HOME/Accuweather_conky_script/curr_cond
 		sed -n 4,6p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
