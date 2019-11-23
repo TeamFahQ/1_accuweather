@@ -397,33 +397,17 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 
 	#Daily forecast
 	if [[ -s $HOME/Accuweather_conky_script/daily_forecast ]]; then
-		sed -i '/var dailyForecast/!d' $HOME/Accuweather_conky_script/daily_forecast
-		sed -i -e 's/var dailyForecast = \[//' -e 's/","\|":"/\n/g' -e 's/icon":/icon\n/g' -e 's/,"phrase/\nphrase/g' -e 's/temp":/temp\n/g' -e 's/},"dow/\ndow/g' -e 's/":{"dTemp/\ndTemp/g' $HOME/Accuweather_conky_script/daily_forecast
-		sed -i -e 's/}}.*,"date/\ndate/' -e 's/}}];//g' -e '1s/^.*$/date/' -e 's/°//g' $HOME/Accuweather_conky_script/daily_forecast
-	    sed -i '601,$d' $HOME/Accuweather_conky_script/daily_forecast
-	    for (( i=9; i<=569; i+=40 ))
-		  do
-	          image=$(sed -n "${i}"p $HOME/Accuweather_conky_script/daily_forecast)
-	          echo $(test_image $image) >> $HOME/Accuweather_conky_script/daily_forecast
-		  done
-		for (( i=30; i<=590; i+=40 ))
+		sed -i '/forecast-list-card forecast-card  today/,/card-button centered nav-card next/!d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i -e 's/^.*weathericons\///g' -e 's/\.svg.*$//g' -e 's/^.*high"> //g' -e 's/^.*low"> \/ //g' -e 's/&#xB0;.*$//g' -e 's/^.*<p>//g' -e 's/<\/p>.*$//g' -e '/<\|>\|class\|href/d' -e 's/^ \|\t*//g' -e '/^$/d' -e '/Precip/d' -e 's/Sun$/Sunday/g' -e 's/Mon$/Monday/g' -e 's/Tue$/Tuesday/g' -e 's/Wed$/Wednesday/g' -e 's/Thu$/Thurday/g' -e 's/Fri$/Friday/g' -e 's/Sat$/Saturday/g' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i '106,$d' $HOME/Accuweather_conky_script/daily_forecast 
+		for (( i=3; i<=101; i+=7 ))
 		  do
 	          image=$(sed -n "${i}"p $HOME/Accuweather_conky_script/daily_forecast)
 	          echo $(test_image $image) >> $HOME/Accuweather_conky_script/daily_forecast
 		  done
 		if [[ $forecast0 == 0 ]]; then
 			j=1
-			for (( i=9; i<=569; i+=40 ))
-			  do
-				if [[ $forecast2015 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_forecast).png $HOME/Accuweather_conky_script/forecast_2015/forecast_$j.png
-				fi
-				if [[ $forecast2016 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_forecast).png $HOME/Accuweather_conky_script/forecast_2016/forecast_$j.png
-				fi
-				((j++))
-			  done
-			for (( i=30; i<=590; i+=40 ))
+			for (( i=3; i<=101; i+=7 ))
 			  do
 				if [[ $forecast2015 == 1 ]]; then
 					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_forecast).png $HOME/Accuweather_conky_script/forecast_2015/forecast_$j.png

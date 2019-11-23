@@ -1,3 +1,6 @@
+2019-11-24:
+Accuweather changed their daily forecast page layout, script updated. The old conkyrcs will not work anymore, please pull the new ones. Thanks to ector1935, manuel-909 and saltasatelites for the feedback.
+
 2019-11-8:
 Accuweather changed their hourly forecast page layout, script corrected. Thanks to morfik, ector1935 and unklar for their feedback and support.
 
