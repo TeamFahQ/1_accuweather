@@ -398,7 +398,7 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 	#Daily forecast
 	if [[ -s $HOME/Accuweather_conky_script/daily_forecast ]]; then
 		sed -i '/forecast-list-card forecast-card  today/,/card-button centered nav-card next/!d' $HOME/Accuweather_conky_script/daily_forecast
-		sed -i -e 's/^.*weathericons\///g' -e 's/\.svg.*$//g' -e 's/^.*high"> //g' -e 's/^.*low"> \/ //g' -e 's/&#xB0;.*$//g' -e 's/^.*<p>//g' -e 's/<\/p>.*$//g' -e '/<\|>\|class\|href/d' -e 's/^ \|\t*//g' -e '/^$/d' -e '/Precip/d' -e 's/Sun$/Sunday/g' -e 's/Mon$/Monday/g' -e 's/Tue$/Tuesday/g' -e 's/Wed$/Wednesday/g' -e 's/Thu$/Thurday/g' -e 's/Fri$/Friday/g' -e 's/Sat$/Saturday/g' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i -e 's/^.*weathericons\///g' -e 's/\.svg.*$//g' -e 's/^.*high"> //g' -e 's/^.*low"> \/ //g' -e 's/&#xB0;.*$//g' -e 's/^.*<p>//g' -e 's/<\/p>.*$//g' -e '/<\|>\|class\|href/d' -e 's/^ \|\t*//g' -e '/^$/d' -e '/Precip/d' -e 's/Sun$/Sunday/g' -e 's/Mon$/Monday/g' -e 's/Tue$/Tuesday/g' -e 's/Wed$/Wednesday/g' -e 's/Thu$/Thursday/g' -e 's/Fri$/Friday/g' -e 's/Sat$/Saturday/g' $HOME/Accuweather_conky_script/daily_forecast
 		sed -i '106,$d' $HOME/Accuweather_conky_script/daily_forecast 
 		for (( i=3; i<=101; i+=7 ))
 		  do
