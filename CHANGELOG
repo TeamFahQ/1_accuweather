@@ -1,3 +1,9 @@
+2019-12-19:
+They've changed their current weather page's layout. Script corrected. Thanks to unklar for the prompt feedback.
+
+2019-12-17: 
+I've corrected a typo in the latest Accuweather script update that caused Thursday to appear as Thurday. Thanks to unklar for reporting it.
+
 2019-11-24:
 Accuweather changed their daily forecast page layout, script updated. The old conkyrcs will not work anymore, please pull the new ones. Thanks to ector1935, manuel-909 and saltasatelites for the feedback.
 
