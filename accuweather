@@ -443,11 +443,11 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0' -H 'Accept-Language: en-US,en;q=0.5' --compressed -o $HOME/Accuweather_conky_script/hourly_raw2 "$hourly_addr2"
 
 	if [[ -s $HOME/Accuweather_conky_script/hourly_raw1 && -s $HOME/Accuweather_conky_script/hourly_raw2 ]]; then
-		sed -i '/<div class=\"hourly-wrapper\">/,/<a class=\"arrow-wrap is-next\"/!d' $HOME/Accuweather_conky_script/hourly_raw1
+		sed -i '/<div class=\"hourly-wrapper\">/,/day=/!d' $HOME/Accuweather_conky_script/hourly_raw1
 		sed -i -e 's/\.svg.*$//g' -e 's/^.*weathericons\///g' -e '/div\|=/d' -e 's/<p>/<p>\n/g' -e 's/<\/p>/\n<\/p>/g' $HOME/Accuweather_conky_script/hourly_raw1
 		sed -i -e '/<\|>/d' -e '/^[ ,\t]*$/d' -e 's/^[ ,\t]*//g' -e 's/&#xB0;//g' -e 's/ km\/h//g' -e 's/ mph//g' -e 's/ (/\n/g' -e 's/)//g' $HOME/Accuweather_conky_script/hourly_raw1
 
-		sed -i '/<div class=\"hourly-wrapper\">/,/<a class=\"arrow-wrap is-next\"/!d' $HOME/Accuweather_conky_script/hourly_raw2
+		sed -i '/<div class=\"hourly-wrapper\">/,/day=/!d' $HOME/Accuweather_conky_script/hourly_raw2
 		sed -i -e 's/\.svg.*$//g' -e 's/^.*weathericons\///g' -e '/div\|=/d' -e 's/<p>/<p>\n/g' -e 's/<\/p>/\n<\/p>/g' $HOME/Accuweather_conky_script/hourly_raw2
 		sed -i -e '/<\|>/d' -e '/^[ ,\t]*$/d' -e 's/^[ ,\t]*//g' -e 's/&#xB0;//g' -e 's/ km\/h//g' -e 's/ mph//g' -e 's/ (/\n/g' -e 's/)//g' $HOME/Accuweather_conky_script/hourly_raw2
 		cat $HOME/Accuweather_conky_script/hourly_raw1 $HOME/Accuweather_conky_script/hourly_raw2 > $HOME/Accuweather_conky_script/hourly
