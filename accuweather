@@ -451,7 +451,9 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 		sed -i -e 's/\.svg.*$//g' -e 's/^.*weathericons\///g' -e '/div\|=/d' -e 's/<p>/<p>\n/g' -e 's/<\/p>/\n<\/p>/g' $HOME/Accuweather_conky_script/hourly_raw2
 		sed -i -e '/<\|>/d' -e '/^[ ,\t]*$/d' -e 's/^[ ,\t]*//g' -e 's/&#xB0;//g' -e 's/ km\/h//g' -e 's/ mph//g' -e 's/ (/\n/g' -e 's/)//g' $HOME/Accuweather_conky_script/hourly_raw2
 		cat $HOME/Accuweather_conky_script/hourly_raw1 $HOME/Accuweather_conky_script/hourly_raw2 > $HOME/Accuweather_conky_script/hourly
-
+#Delete indoor humidity crap
+		sed -i '/Indoor Humidity:/,+2d' $HOME/Accuweather_conky_script/hourly
+#Done
 		sed -i '769,$d' $HOME/Accuweather_conky_script/hourly
 
 		for (( i=3; i<=768; i+=32 ))
