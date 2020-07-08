@@ -65,6 +65,6 @@ conky.config = {
 conky.text = [[
 ${font Arial:size=11}${color1}HOURLY WEATHER ${font}${hr 2}${texeci 600 bash $HOME/Accuweather_conky_script/accuweather -h}
 
-${execpi 600 sed -n '1,26p' $HOME/Accuweather_conky_script/altogether24}
+${execpi 600 sed -n '1,30p' $HOME/Accuweather_conky_script/altogether24}
 
 ]];
