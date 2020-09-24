@@ -353,7 +353,7 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 		sed -n 15p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
 		sed '/sunrise-sunset card-module content-module/,/temp-history content-module/!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp1
 		sed -i -e 's/^.*"text-value">//g' -e 's/<\/span>$//g' -e '/</d' $HOME/Accuweather_conky_script/curr_cond_temp1
-		sed -i -e '1d;4d' -e 's/^[\t]*//g' -e 's/ .*$//g' -e '/^$/d' $HOME/Accuweather_conky_script/curr_cond_temp1
+		sed -i -e '1d;4d' -e 's/^[\t]*//g' -e 's/ AM/:AM/g' -e 's/ PM/:PM/g' -e 's/ .*$//g' -e '/^$/d' -e 's/:AM/ AM/g' -e 's/:PM/ PM/g' $HOME/Accuweather_conky_script/curr_cond_temp1
 		sed -i -e '1N;s/\n/:/' -e '5N;s/\n/:/' $HOME/Accuweather_conky_script/curr_cond_temp1
 
 		sed -n 2,3p $HOME/Accuweather_conky_script/curr_cond_temp1 >> $HOME/Accuweather_conky_script/curr_cond
