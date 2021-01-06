@@ -372,6 +372,8 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 
 		rm $HOME/Accuweather_conky_script/curr_cond_temp $HOME/Accuweather_conky_script/curr_cond_temp1
 		
+		sed -i '8s/^.*; //' $HOME/Accuweather_conky_script/curr_cond
+
 	    image=$(sed -n 1p $HOME/Accuweather_conky_script/curr_cond)
 	    echo $(test_image $image) >> $HOME/Accuweather_conky_script/curr_cond
 		sunrise_time=$(sed -n 14p $HOME/Accuweather_conky_script/curr_cond)
