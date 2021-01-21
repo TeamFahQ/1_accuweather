@@ -386,16 +386,16 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/curr_cond
 		wind=$(sed -n 5p $HOME/Accuweather_conky_script/curr_cond)
 		echo $(test_wind $wind) >> $HOME/Accuweather_conky_script/curr_cond
-        if (( $(sed -n 14p /$HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
+        if (( $(sed -n 14p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
 			sed -i '14s/^/0/' $HOME/Accuweather_conky_script/curr_cond
 		fi
-		if (( $(sed -n 15p /$HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
+		if (( $(sed -n 15p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
 			sed -i '15s/^/0/' $HOME/Accuweather_conky_script/curr_cond
 		fi
-		if (( $(sed -n 18p /$HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
+		if (( $(sed -n 18p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
 			sed -i '18s/^/0/' $HOME/Accuweather_conky_script/curr_cond
 		fi
-		if (( $(sed -n 19p /$HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
+		if (( $(sed -n 19p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
 			sed -i '19s/^/0/' $HOME/Accuweather_conky_script/curr_cond
 		fi
 	    if [[ $forecast2015 == 1 ]]; then
@@ -410,7 +410,7 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 
 	#Daily forecast
 	if [[ -s $HOME/Accuweather_conky_script/daily_forecast ]]; then
-		sed -i '/<div class="daily-wrapper">/,/Further Ahead$/!d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i '/<div class="daily-wrapper" data-qa="dailyCard0">/,/Further Ahead/!d' $HOME/Accuweather_conky_script/daily_forecast
 		sed -i -e 's/^.*dow date">//g' -e 's/^.*sub date">//g' -e 's/^.*weathericons\///g' -e 's/\.svg.*$//g' -e 's/^.*"high">//g' -e 's/^.*"low">\///g' -e 's/&#xB0;<\/span>//g' -e 's/<\/span>//g' -e '/<\|>\|fill=\|^[ \|\t]*$\|Further Ahead/d' -e 's/^[ \|\t]*//g' $HOME/Accuweather_conky_script/daily_forecast
 		sed -i -e 's/^Sun$/Sunday/g' -e 's/^Mon$/Monday/g' -e 's/^Tue$/Tuesday/g' -e 's/^Wed$/Wednesday/g' -e 's/^Thu$/Thursday/g' -e 's/^Fri$/Friday/g' -e 's/^Sat$/Saturday/g' $HOME/Accuweather_conky_script/daily_forecast
 		for (( i=1; i<=21; i+=1 ))
