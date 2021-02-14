@@ -413,6 +413,7 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 		sed -i '/<div class="daily-wrapper" data-qa="dailyCard0">/,/Further Ahead/!d' $HOME/Accuweather_conky_script/daily_forecast
 		sed -i -e 's/^.*dow date">//g' -e 's/^.*sub date">//g' -e 's/^.*weathericons\///g' -e 's/\.svg.*$//g' -e 's/^.*"high">//g' -e 's/^.*"low">\///g' -e 's/&#xB0;<\/span>//g' -e 's/<\/span>//g' -e '/<\|>\|fill=\|^[ \|\t]*$\|Further Ahead/d' -e 's/^[ \|\t]*//g' $HOME/Accuweather_conky_script/daily_forecast
 		sed -i -e 's/^Sun$/Sunday/g' -e 's/^Mon$/Monday/g' -e 's/^Tue$/Tuesday/g' -e 's/^Wed$/Wednesday/g' -e 's/^Thu$/Thursday/g' -e 's/^Fri$/Friday/g' -e 's/^Sat$/Saturday/g' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i '/WinterCast/,+1d' $HOME/Accuweather_conky_script/daily_forecast
 		for (( i=1; i<=21; i+=1 ))
 		  do
 	          echo >> $HOME/Accuweather_conky_script/daily_forecast
