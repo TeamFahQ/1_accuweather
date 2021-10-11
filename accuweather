@@ -493,6 +493,7 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 		#Hourly_raw1 file
 		sed -i '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $HOME/Accuweather_conky_script/hourly_raw1
 		sed -i -e 's/\.svg.*$//g' -e 's/^.*weathericons\///g' -e '/Air Quality/d' -e 's/^.*<p>//g' -e 's/<span class="value">/\n/g' -e 's/<\/span>.*$//g' -e 's/^.*<span>//g' -e 's/<div class="precip">/precip/g' -e 's/&#xB0;.*$//g' -e 's/^[ \|\t]*//g' -e '/<\|>\|=/d' -e 's/&#xAE;//g' $HOME/Accuweather_conky_script/hourly_raw1
+		sed -i -e '/RealFeel Shade.*$/,+1d' $HOME/Accuweather_conky_script/hourly_raw1
 		#Populate Max UV and Prec. Amount values where needed
 		i=1
 		while IFS= read -r line;
@@ -516,6 +517,7 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 		#Hourly_raw2 file
 		sed -i '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $HOME/Accuweather_conky_script/hourly_raw2
 		sed -i -e 's/\.svg.*$//g' -e 's/^.*weathericons\///g' -e '/Air Quality/d' -e 's/^.*<p>//g' -e 's/<span class="value">/\n/g' -e 's/<\/span>.*$//g' -e 's/^.*<span>//g' -e 's/<div class="precip">/precip/g' -e 's/&#xB0;.*$//g' -e 's/^[ \|\t]*//g' -e '/<\|>\|=/d' -e 's/&#xAE;//g' $HOME/Accuweather_conky_script/hourly_raw2
+		sed -i -e '/RealFeel Shade.*$/,+1d' $HOME/Accuweather_conky_script/hourly_raw2
 		#Populate Max UV and Prec. Amount values where needed
 		i=1
 		while IFS= read -r line;
