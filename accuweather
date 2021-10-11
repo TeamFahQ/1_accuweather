@@ -10,7 +10,7 @@ weather_conky_launch_command="conky -b"
 # Put your Accuweather address here #
 #####################################
 #address="https://www.accuweather.com/en/ar/buenos-aires/7894/weather-forecast/7894"
-address="https://www.accuweather.com/en/us/hutto-tx/78634/weather-forecast/2110192"
+address="https://www.accuweather.com/en/us/hutto/78634/weather-forecast/2110192"
 #address="https://www.accuweather.com/en/gr/kastoria/178682/weather-forecast/178682"
 #address="https://www.accuweather.com/en/de/lichtenstein/09350/weather-forecast/171261"
 #address="https://www.accuweather.com/en/aq/casey-station/2273690/weather-forecast/2273690"
