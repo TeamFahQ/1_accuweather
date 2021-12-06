@@ -76,7 +76,7 @@ ${goto 55}${execi 600 sed -n '34p' $HOME/Accuweather_conky_script/daily_forecast
 ${voffset -10}${color2}${font Zekton:size=10:bold}${offset -1}SYSTEM ${voffset 2}${color1}${hr 2}
 ${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${offset 3}${sysname}${offset 3}${kernel}${alignr}${machine}
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}Threadripper 1920X${alignr}3.9 GHz
-${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce GTX ${alignr}1660 Super
+${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce RTX ${alignr}3060 Gaming X
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}${alignc}${exec cat /sys/devices/virtual/dmi/id/board_vendor|cut -c1-4} ${exec cat /sys/devices/virtual/dmi/id/board_name}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}FREQ: ${freq_g 0} GHz ${color}${voffset 5}${color1}${hr 2}${color}
@@ -93,7 +93,9 @@ ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}TEMPS & FANS ${vof
 ${color}${font}${voffset -2}CPU's:  ${execpi 2 (sensors -f| grep -A 0 'CPU Temperature'|cut -c27-34)} / ${execpi 2 (sensors | grep -A 0 'CPU Temperature'|cut -c27-34)}${alignc}${alignr}Fan:${execpi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c25-30)}
 ${voffset 2}M/B:  ${execpi 2 (sensors -f| grep -A 0 'Motherboard Temperature'|cut -c27-34)} / ${execpi 2 (sensors | grep -A 0 'Motherboard Temperature'|cut -c27-34)}${alignc}${alignr}Fan:${execpi 2 (sensors -f|grep -m 1 'Chassis Fan 1'|cut -c25-30)}
 ${voffset 2}Probe:  ${execpi 2 (sensors -f| grep -A 0 'Tsensor Temperature'|cut -c27-34)} / ${execpi 2 (sensors | grep -A 0 'Tsensor Temperature'|cut -c27-34)}${alignc}${alignr}Fan:${execpi 2 (sensors -f|grep -m 1 'Chassis Fan 2'|cut -c25-30)}
-GPU: +${execi 2 bash $HOME/Conky/NVIDIA/gpu} °F / ${execi 2 bash $HOME/Conky/NVIDIA/gpu-c} °C${alignc}${alignr}Fan: ${execpi 2 (nvidia-settings -q all | grep  -i "Attribute 'GPUCurrentFanSpeedRPM'" | cut -d : -f4 | cut -d . -f1)}
+GPU: +${execi 2 bash $HOME/Conky/NVIDIA/gpu} °F / ${execi 2 bash $HOME/Conky/NVIDIA/gpu-c} °C${alignr}Fan: ${execpi 2 (nvidia-settings -q all | grep  -i "Attribute 'GPUCurrentFanSpeedRPM'" | cut -d : -f4 | cut -d . -f1 | cut -d "
+" -f1)}/${execpi 2 (nvidia-settings -q all | grep  -i "Attribute 'GPUCurrentFanSpeedRPM'" | cut -d "
+" -f1 | cut -d : -f4 | cut -d . -f1)}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}STORAGE ${voffset 2}${color1}${hr 2}
 ${color}${voffset -2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}Linux${goto 80}${fs_used /} | ${fs_size /}${alignr}${fs_free_perc /}%
