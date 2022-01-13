@@ -1,11 +1,10 @@
 conky.config = {
 	own_window = true,
 	own_window_class = 'Conky',
-	own_window_transparent = true,
-	own_window_argb_value = 51,
+	own_window_transparent = false,
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	own_window_argb_visual = true,
-	own_window_argb_value = 180,
+	own_window_argb_value = 60,
 	minimum_width = 850, minimum_height = 1100,
 	maximum_width = 225,
 	double_buffer = true,
@@ -100,7 +99,7 @@ GPU: +${execi 2 bash $HOME/Conky/NVIDIA/gpu} °F / ${execi 2 bash $HOME/Conky/NV
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}STORAGE ${voffset 2}${color1}${hr 2}
 ${color}${voffset -2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}Linux${goto 80}${fs_used /} | ${fs_size /}${alignr}${fs_free_perc /}%
 ${voffset 2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}Home${goto 80}${fs_used /home/thomas} | ${fs_size /home/thomas}${alignr}${fs_free_perc /home/thomas}%
-${voffset 2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}Ext${goto 80}${fs_used /media/thomas/Ext} | ${fs_size /media/thomas/Ext}${alignr}${fs_free_perc /media/thomas/Ext}%
+${voffset 2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}LinuxBU${goto 80}${fs_used /media/thomas/LinuxBU} | ${fs_size /media/thomas/LinuxBU}${alignr}${fs_free_perc /media/thomas/LinuxBU}%
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}PROCESSES ${voffset 2}${color1}${hr 2}
 ${voffset -2}${color2}${font StyleBats:size=10}z ${offset -2}${voffset -3}${font Zekton:size=8:bold}Running ${running_processes}${offset 40}  Usage Total ${processes}${color}
