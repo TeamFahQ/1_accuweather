@@ -18,6 +18,11 @@ address="https://www.accuweather.com/en/us/hutto/78634/weather-forecast/2110192"
 #Pause weather conky
 pkill -STOP -xf "$weather_conky_launch_command"
 
+# Make the temp directories as needed
+  [ -d $HOME/Accuweather_conky_script/temp ] || mkdir $HOME/Accuweather_conky_script/temp
+  [ -d $HOME/Accuweather_conky_script/temp/images ] || mkdir $HOME/Accuweather_conky_script/temp/images
+  [ -d $HOME/Accuweather_conky_script/temp/hourly ] || mkdir $HOME/Accuweather_conky_script/temp/hourly
+
 #function: test_image
 test_image () {
     case $1 in
@@ -317,159 +322,159 @@ if [[ $forecast0 == 1 || $forecast2015 == 1 || $forecast2016 == 1 ]]; then
 
 sleep 0.2
 	curr_addr="$(echo $address|sed 's/weather-forecast.*$//')"current-weather/"$last_number"
-	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/curr_cond_raw "$curr_addr"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/temp/curr_cond_raw "$curr_addr"
 
 	daily_addr="$(echo $address|sed 's/weather-forecast.*$//')"daily-weather-forecast/"$last_number"
-	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/daily_forecast_raw "$daily_addr"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/temp/daily_forecast_raw "$daily_addr"
 
 ##### del image forecast
 	if [[ $forecast2015 == 1 ]]; then
-	  if [[ -f $HOME/Accuweather_conky_script/forecast_2015/forecast_*.png ]]; then
-		rm $HOME/Accuweather_conky_script/forecast_2015/forecast_*.png
+	  if [[ -f $HOME/Accuweather_conky_script/temp/images/forecast_*.png ]]; then
+		rm $HOME/Accuweather_conky_script/temp/images/forecast_*.png
 	  fi
 	fi
 	if [[ $forecast2016 == 1 ]]; then
-	  if [[ -f $HOME/Accuweather_conky_script/forecast_2016/forecast_*.png ]]; then
-		rm $HOME/Accuweather_conky_script/forecast_2016/forecast_*.png
+	  if [[ -f $HOME/Accuweather_conky_script/temp/images/forecast_*.png ]]; then
+		rm $HOME/Accuweather_conky_script/temp/images/forecast_*.png
 	  fi
 	fi
 
 sleep 0.2
 
 	#current conditions
-	if [[ -s $HOME/Accuweather_conky_script/curr_cond_raw ]]; then
+	if [[ -s $HOME/Accuweather_conky_script/temp/curr_cond_raw ]]; then
 
-		sed '/current-weather-card card-module content-module non-ad/,/glacier-ad /!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp
+		sed '/current-weather-card card-module content-module non-ad/,/glacier-ad /!d' $HOME/Accuweather_conky_script/temp/curr_cond_raw > $HOME/Accuweather_conky_script/temp/curr_cond_temp
 
-sed -i '/div class=\"label-tooltip\" data-js/,/div class=\"current-weather-details/d' $HOME/Accuweather_conky_script/curr_cond_temp
-		sed -i -e 's/\.svg.*$//g' -e 's/<\/div>//g' -e 's/<div>//g' -e 's/<\/span>//g' -e 's/<span class.*$//g' -e 's/^[\t]*//g' $HOME/Accuweather_conky_script/curr_cond_temp
-		sed -i -e 's/.*weathericons\///' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/.*RealFeel&#xAE; //g' -e '/RealFeel Shade™/,+1d' -e '/Indoor Humidity/,+1d' -e '/^$/d' $HOME/Accuweather_conky_script/curr_cond_temp
+sed -i '/div class=\"label-tooltip\" data-js/,/div class=\"current-weather-details/d' $HOME/Accuweather_conky_script/temp/curr_cond_temp
+		sed -i -e 's/\.svg.*$//g' -e 's/<\/div>//g' -e 's/<div>//g' -e 's/<\/span>//g' -e 's/<span class.*$//g' -e 's/^[\t]*//g' $HOME/Accuweather_conky_script/temp/curr_cond_temp
+		sed -i -e 's/.*weathericons\///' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/.*RealFeel&#xAE; //g' -e '/RealFeel Shade™/,+1d' -e '/Indoor Humidity/,+1d' -e '/^$/d' $HOME/Accuweather_conky_script/temp/curr_cond_temp
 #
-		sed -i '1s/^0//' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i '1s/^0//' $HOME/Accuweather_conky_script/temp/curr_cond_temp
 
 # temporary file to control
 #
-cp $HOME/Accuweather_conky_script/curr_cond_temp $HOME/Accuweather_conky_script/curr_cond_control_point
+cp $HOME/Accuweather_conky_script/temp/curr_cond_temp $HOME/Accuweather_conky_script/temp/curr_cond_control_point
 
 
-		if [[ $(sed -n 5p $HOME/Accuweather_conky_script/curr_cond_temp) != 'Max UV Index' ]]; then
-			sed -i "5s/^/Max UV\n0\n/" $HOME/Accuweather_conky_script/curr_cond_temp
+		if [[ $(sed -n 5p $HOME/Accuweather_conky_script/temp/curr_cond_temp) != 'Max UV Index' ]]; then
+			sed -i "5s/^/Max UV\n0\n/" $HOME/Accuweather_conky_script/temp/curr_cond_temp
 		fi
 
 
-		wind_dir=$(sed -n 8p $HOME/Accuweather_conky_script/curr_cond_temp|head -c 1)
+		wind_dir=$(sed -n 8p $HOME/Accuweather_conky_script/temp/curr_cond_temp|head -c 1)
 		if [[ $wind_dir == 0 ]]; then
-			sed -i '8s/^/CLM /' $HOME/Accuweather_conky_script/curr_cond_temp
+			sed -i '8s/^/CLM /' $HOME/Accuweather_conky_script/temp/curr_cond_temp
 		fi
 
-		sed -i '8s/ /\n/1' $HOME/Accuweather_conky_script/curr_cond_temp
+		sed -i '8s/ /\n/1' $HOME/Accuweather_conky_script/temp/curr_cond_temp
 
 
-		sed '/sunrise-sunset card-module content-module/,/temp-history content-module/!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/curr_cond_temp1
+		sed '/sunrise-sunset card-module content-module/,/temp-history content-module/!d' $HOME/Accuweather_conky_script/temp/curr_cond_raw > $HOME/Accuweather_conky_script/temp/curr_cond_temp1
 
-		sed -i -e 's/.*"text-value">//g' -e 's/<\/span>$//g' -e '/</d' $HOME/Accuweather_conky_script/curr_cond_temp1
+		sed -i -e 's/.*"text-value">//g' -e 's/<\/span>$//g' -e '/</d' $HOME/Accuweather_conky_script/temp/curr_cond_temp1
 #
-		sed -i -e '1d;4d' -e 's/^[\t]*//g' -e 's/ AM/:AM/g' -e 's/ PM/:PM/g' -e 's/ .*$//g' -e '/^$/d' -e 's/:AM/ AM/g' -e 's/:PM/ PM/g' $HOME/Accuweather_conky_script/curr_cond_temp1
+		sed -i -e '1d;4d' -e 's/^[\t]*//g' -e 's/ AM/:AM/g' -e 's/ PM/:PM/g' -e 's/ .*$//g' -e '/^$/d' -e 's/:AM/ AM/g' -e 's/:PM/ PM/g' $HOME/Accuweather_conky_script/temp/curr_cond_temp1
 
-		sed -i -e '1N;s/\n/:/' $HOME/Accuweather_conky_script/curr_cond_temp1
+		sed -i -e '1N;s/\n/:/' $HOME/Accuweather_conky_script/temp/curr_cond_temp1
 
-		if [[ $(sed -n 4p $HOME/Accuweather_conky_script/curr_cond_temp1) != "N/A" && $(sed -n 5p $HOME/Accuweather_conky_script/curr_cond_temp1) != "N/A" && $(sed -n 6p $HOME/Accuweather_conky_script/curr_cond_temp1) != "N/A" && $(sed -n 7p $HOME/Accuweather_conky_script/curr_cond_temp1) != "N/A" ]]; then
+		if [[ $(sed -n 4p $HOME/Accuweather_conky_script/temp/curr_cond_temp1) != "N/A" && $(sed -n 5p $HOME/Accuweather_conky_script/temp/curr_cond_temp1) != "N/A" && $(sed -n 6p $HOME/Accuweather_conky_script/temp/curr_cond_temp1) != "N/A" && $(sed -n 7p $HOME/Accuweather_conky_script/temp/curr_cond_temp1) != "N/A" ]]; then
 
-			sed -i '4N;s/\n/:/' $HOME/Accuweather_conky_script/curr_cond_temp1
+			sed -i '4N;s/\n/:/' $HOME/Accuweather_conky_script/temp/curr_cond_temp1
 		fi
 
 
 # sorting  сортировка
 # curr_cond line 1,2 номер изобр. облака и температуры сейчас , number icon and Temperature now
-		sed -n 1,2p $HOME/Accuweather_conky_script/curr_cond_temp > $HOME/Accuweather_conky_script/curr_cond
+		sed -n 1,2p $HOME/Accuweather_conky_script/temp/curr_cond_temp > $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 3 температура ощущение  Real Feel
-		sed -n 4p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 4p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 4 облачность  Forecast
-		sed -n 3p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 3p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 5 направление ветра  Wind Direction
-		sed -n 8p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 8p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 6 скорость ветра  Wind Speed
 #
-		sed -n 9p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 9p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 7 влажность Humidity
-		sed -n 13p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 13p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 8 давление  Pressure
-		sed -n 17p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 17p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 9 УФ индекс  UV Index
-		sed -n 6p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 6p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 10 облачность  Cloud Cover
-		sed -n 19p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 19p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 11 влажность  Indoor Humidity (for compatibility with old config file) 
-		sed -n 13p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 13p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 12 точка росы  Dew Point
-		sed -n 15p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 15p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 13 видимость  Visibility
-		sed -n 21p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 21p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 14,15 солнце  рассвет, закат  Sun Rise Sun Set
-		sed -n 2,3p $HOME/Accuweather_conky_script/curr_cond_temp1 >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 2,3p $HOME/Accuweather_conky_script/temp/curr_cond_temp1 >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 16 солнце длит.  Sunlight Duration
-		sed -n 1p $HOME/Accuweather_conky_script/curr_cond_temp1 >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 1p $HOME/Accuweather_conky_script/temp/curr_cond_temp1 >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 17 порывы ветра  Wind Gusts
-		sed -n 11p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 11p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 18,19 луна  восход, заход  Moon Rise Moon Set
-		sed -n 5,6p $HOME/Accuweather_conky_script/curr_cond_temp1 >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 5,6p $HOME/Accuweather_conky_script/temp/curr_cond_temp1 >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 20   Moonlight Duration
-		sed -n 4p $HOME/Accuweather_conky_script/curr_cond_temp1 >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 4p $HOME/Accuweather_conky_script/temp/curr_cond_temp1 >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 21 высота облаков  Cloud Ceiling
-		sed -n 23p $HOME/Accuweather_conky_script/curr_cond_temp >> $HOME/Accuweather_conky_script/curr_cond
+		sed -n 23p $HOME/Accuweather_conky_script/temp/curr_cond_temp >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 22 	#convert Image Number curr. cond.  to  Weather font letter curr. cond.
-	    image=$(sed -n 1p $HOME/Accuweather_conky_script/curr_cond)
-	    echo $(test_image $image) >> $HOME/Accuweather_conky_script/curr_cond
+	    image=$(sed -n 1p $HOME/Accuweather_conky_script/temp/curr_cond)
+	    echo $(test_image $image) >> $HOME/Accuweather_conky_script/temp/curr_cond
 # curr_cond line 23   Sun Rise-24h
-		sunrise_time=$(sed -n 14p $HOME/Accuweather_conky_script/curr_cond)
-		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/curr_cond
+		sunrise_time=$(sed -n 14p $HOME/Accuweather_conky_script/temp/curr_cond)
+		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 24  Sun Set-24h
-		sunrise_time=$(sed -n 15p $HOME/Accuweather_conky_script/curr_cond)
-		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/curr_cond
+		sunrise_time=$(sed -n 15p $HOME/Accuweather_conky_script/temp/curr_cond)
+		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 25  Moon Rise-24h
-		sunrise_time=$(sed -n 18p $HOME/Accuweather_conky_script/curr_cond)
-		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/curr_cond
+		sunrise_time=$(sed -n 18p $HOME/Accuweather_conky_script/temp/curr_cond)
+		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 # curr_cond line 26  Moon Set-24h
-		sunrise_time=$(sed -n 19p $HOME/Accuweather_conky_script/curr_cond)
-		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/curr_cond
+		sunrise_time=$(sed -n 19p $HOME/Accuweather_conky_script/temp/curr_cond)
+		echo $(convert_time "$sunrise_time") >> $HOME/Accuweather_conky_script/temp/curr_cond
 
 
 ## curr_cond line 27   convert Wind Direction curr. cond.  to  Wind font letter curr. cond.
-		wind=$(sed -n 5p $HOME/Accuweather_conky_script/curr_cond)
-		echo $(test_wind $wind) >> $HOME/Accuweather_conky_script/curr_cond
+		wind=$(sed -n 5p $HOME/Accuweather_conky_script/temp/curr_cond)
+		echo $(test_wind $wind) >> $HOME/Accuweather_conky_script/temp/curr_cond
 
-	if (( $(sed -n 14p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
-			sed -i '14s/^/0/' $HOME/Accuweather_conky_script/curr_cond
+	if (( $(sed -n 14p $HOME/Accuweather_conky_script/temp/curr_cond|wc -c) == 8 )); then
+			sed -i '14s/^/0/' $HOME/Accuweather_conky_script/temp/curr_cond
 		fi
-		if (( $(sed -n 15p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
-			sed -i '15s/^/0/' $HOME/Accuweather_conky_script/curr_cond
+		if (( $(sed -n 15p $HOME/Accuweather_conky_script/temp/curr_cond|wc -c) == 8 )); then
+			sed -i '15s/^/0/' $HOME/Accuweather_conky_script/temp/curr_cond
 		fi
-		if (( $(sed -n 18p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
-			sed -i '18s/^/0/' $HOME/Accuweather_conky_script/curr_cond
+		if (( $(sed -n 18p $HOME/Accuweather_conky_script/temp/curr_cond|wc -c) == 8 )); then
+			sed -i '18s/^/0/' $HOME/Accuweather_conky_script/temp/curr_cond
 		fi
-		if (( $(sed -n 19p $HOME/Accuweather_conky_script/curr_cond|wc -c) == 8 )); then
-			sed -i '19s/^/0/' $HOME/Accuweather_conky_script/curr_cond
+		if (( $(sed -n 19p $HOME/Accuweather_conky_script/temp/curr_cond|wc -c) == 8 )); then
+			sed -i '19s/^/0/' $HOME/Accuweather_conky_script/temp/curr_cond
 	fi
 
 sleep 0.2
@@ -477,73 +482,73 @@ sleep 0.2
 # Copy image clouds
 
 	    if [[ $forecast2015 == 1 ]]; then
-			cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n 1p $HOME/Accuweather_conky_script/curr_cond).png $HOME/Accuweather_conky_script/forecast_2015/forecast_0.png
-			cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n 5p $HOME/Accuweather_conky_script/curr_cond).png $HOME/Accuweather_conky_script/forecast_2015/wind_0.png
+			cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n 1p $HOME/Accuweather_conky_script/temp/curr_cond).png $HOME/Accuweather_conky_script/temp/images/forecast_0.png
+			cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n 5p $HOME/Accuweather_conky_script/temp/curr_cond).png $HOME/Accuweather_conky_script/temp/images/wind_0.png
 		fi
 		if [[ $forecast2016 == 1 ]]; then
-			cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n 1p $HOME/Accuweather_conky_script/curr_cond).png $HOME/Accuweather_conky_script/forecast_2016/forecast_0.png
-			cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n 5p $HOME/Accuweather_conky_script/curr_cond).png $HOME/Accuweather_conky_script/forecast_2016/wind_0.png
+			cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n 1p $HOME/Accuweather_conky_script/temp/curr_cond).png $HOME/Accuweather_conky_script/temp/images/forecast_0.png
+			cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n 5p $HOME/Accuweather_conky_script/temp/curr_cond).png $HOME/Accuweather_conky_script/temp/images/wind_0.png
 		fi
 	fi
 
 
 ## delete tendency pressure
-#		sed -i '8s/^.*; //' $HOME/Accuweather_conky_script/curr_cond
+#		sed -i '8s/^.*; //' $HOME/Accuweather_conky_script/temp/curr_cond
 
 ## tendency pressure
 #
-	sed -i -e '8s/&#x2194;/↔/g' -e '8s/&#x2191;/↑/g' -e '8s/&#x2193;/↓/g' -e '8s/&#x2197;/↗/g' -e '8s/&#x2198;/↘/g' -e '8s/&#x219D;/↝/g' $HOME/Accuweather_conky_script/curr_cond
+	sed -i -e '8s/&#x2194;/↔/g' -e '8s/&#x2191;/↑/g' -e '8s/&#x2193;/↓/g' -e '8s/&#x2197;/↗/g' -e '8s/&#x2198;/↘/g' -e '8s/&#x219D;/↝/g' $HOME/Accuweather_conky_script/temp/curr_cond
 
 
 ########## location, time update
-		sed '/header-loc-weather">\|<p class="sub">/!d' $HOME/Accuweather_conky_script/curr_cond_raw > $HOME/Accuweather_conky_script/location
-		sed -i -e 's/^.*">//g' -e 's/<\/div>.*$//g' -e 's/<\/p>.*$//g' -e 's/,/ /' $HOME/Accuweather_conky_script/location
+		sed '/header-loc-weather">\|<p class="sub">/!d' $HOME/Accuweather_conky_script/temp/curr_cond_raw > $HOME/Accuweather_conky_script/temp/location
+		sed -i -e 's/^.*">//g' -e 's/<\/div>.*$//g' -e 's/<\/p>.*$//g' -e 's/,/ /' $HOME/Accuweather_conky_script/temp/location
 
 ############
 
 
 	#Daily forecast
-	if [[ -s $HOME/Accuweather_conky_script/daily_forecast_raw ]]; then
+	if [[ -s $HOME/Accuweather_conky_script/temp/daily_forecast_raw ]]; then
 
-		sed '/<div class="daily-wrapper" data-qa="dailyCard0">/,/Further Ahead/!d' $HOME/Accuweather_conky_script/daily_forecast_raw > $HOME/Accuweather_conky_script/daily_forecast
+		sed '/<div class="daily-wrapper" data-qa="dailyCard0">/,/Further Ahead/!d' $HOME/Accuweather_conky_script/temp/daily_forecast_raw > $HOME/Accuweather_conky_script/temp/daily_forecast
 
-		sed -i '/<div class="daily-wintercast-cta">/,/div class="daily-wrapper"/d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i '/<div class="daily-wintercast-cta">/,/div class="daily-wrapper"/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
-		sed -i -e 's/\.svg.*$//g' -e 's/&#xB0;<\/span>//g' -e 's/<\/span>//g' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i -e 's/\.svg.*$//g' -e 's/&#xB0;<\/span>//g' -e 's/<\/span>//g' $HOME/Accuweather_conky_script/temp/daily_forecast
 
-		sed -i -e 's/^.*">\///' -e 's/^.*">//' -e 's/.*weathericons\///g' -e 's/^[\t]*//g' -e '/^$/d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i -e 's/^.*">\///' -e 's/^.*">//' -e 's/.*weathericons\///g' -e 's/^[\t]*//g' -e '/^$/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
-		sed -i -e '/<\|>\|fill=\|^[ ]*$\|Further Ahead/d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i -e '/<\|>\|fill=\|^[ ]*$\|Further Ahead/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
-		sed -i '/WinterCast/,+1d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i '/WinterCast/,+1d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
 
-		sed -i '85,$d' $HOME/Accuweather_conky_script/daily_forecast
+		sed -i '85,$d' $HOME/Accuweather_conky_script/temp/daily_forecast
 #
 # Change a short name to a long one or translate into another language
-#		sed -i -e 's/^Sun$/Sunday/g' -e 's/^Mon$/Monday/g' -e 's/^Tue$/Tuesday/g' -e 's/^Wed$/Wednesday/g' -e 's/^Thu$/Thursday/g' -e 's/^Fri$/Friday/g' -e 's/^Sat$/Saturday/g' $HOME/Accuweather_conky_script/daily_forecast
+#		sed -i -e 's/^Sun$/Sunday/g' -e 's/^Mon$/Monday/g' -e 's/^Tue$/Tuesday/g' -e 's/^Wed$/Wednesday/g' -e 's/^Thu$/Thursday/g' -e 's/^Fri$/Friday/g' -e 's/^Sat$/Saturday/g' $HOME/Accuweather_conky_script/temp/daily_forecast
 
 sleep 0.2
 # Copy image clouds
 
 		for (( i=1; i<=21; i+=1 ))
 		  do
-	          echo >> $HOME/Accuweather_conky_script/daily_forecast
+	          echo >> $HOME/Accuweather_conky_script/temp/daily_forecast
 		  done
 		for (( i=3; i<=80; i+=7 ))
 		  do
-	          image=$(sed -n "${i}"p $HOME/Accuweather_conky_script/daily_forecast)
-	          echo $(test_image $image) >> $HOME/Accuweather_conky_script/daily_forecast
+	          image=$(sed -n "${i}"p $HOME/Accuweather_conky_script/temp/daily_forecast)
+	          echo $(test_image $image) >> $HOME/Accuweather_conky_script/temp/daily_forecast
 		  done
 		if [[ $forecast0 == 0 ]]; then
 			j=1
 			for (( i=3; i<=80; i+=7 ))
 			  do
 				if [[ $forecast2015 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_forecast).png $HOME/Accuweather_conky_script/forecast_2015/forecast_$j.png
+					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/daily_forecast).png $HOME/Accuweather_conky_script/temp/images/forecast_$j.png
 				fi
 				if [[ $forecast2016 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_forecast).png $HOME/Accuweather_conky_script/forecast_2016/forecast_$j.png
+					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/daily_forecast).png $HOME/Accuweather_conky_script/temp/images/forecast_$j.png
 				fi
 				((j++))
 			  done
@@ -666,13 +671,13 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 
 ##### del image hourly
 	if [[ $hourly2015 == 1 ]]; then
-	  if [[ -f $HOME/Accuweather_conky_script/hourly_2015/hourly_*.png ]]; then
-		rm $HOME/Accuweather_conky_script/hourly_2015/hourly_*.png
+	  if [[ -f $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png ]]; then
+		rm $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png
 	  fi
 	fi
 	if [[ $hourly2016 == 1 ]]; then
-	  if [[ -f $HOME/Accuweather_conky_script/hourly_2016/hourly_*.png ]]; then
-		rm $HOME/Accuweather_conky_script/hourly_2016/hourly_*.png
+	  if [[ -f $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png ]]; then
+		rm $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png
 	  fi
 	fi
 
@@ -690,10 +695,10 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 			for (( i=3; i<=720; i+=30 ))
 			  do
 		    	if [[ $hourly2015 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly).png $HOME/Accuweather_conky_script/hourly_2015/hourly_$j.png
+					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly).png $HOME/Accuweather_conky_script/temp/hourly/hourly_$j.png
 				fi
 				if [[ $hourly2016 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly).png $HOME/Accuweather_conky_script/hourly_2016/hourly_$j.png
+					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly).png $HOME/Accuweather_conky_script/temp/hourly/hourly_$j.png
 				fi
 		    	((j++))
 			  done
@@ -1225,19 +1230,19 @@ sleep 0.5
 #del. temp files
 
 #
-  if [[ -f $HOME/Accuweather_conky_script/curr_cond_temp ]]; then
+  if [[ -f $HOME/Accuweather_conky_script/temp/curr_cond_temp ]]; then
 #
-	rm $HOME/Accuweather_conky_script/curr_cond_temp
-#
-  fi
-#
-  if [[ -f $HOME/Accuweather_conky_script/curr_cond_temp1 ]]; then
-#
-	rm $HOME/Accuweather_conky_script/curr_cond_temp1
+	rm $HOME/Accuweather_conky_script/temp/curr_cond_temp
 #
   fi
-#  if [[ -f $HOME/Accuweather_conky_script/curr_cond_control_point ]]; then
-#	rm $HOME/Accuweather_conky_script/curr_cond_control_point
+#
+  if [[ -f $HOME/Accuweather_conky_script/temp/curr_cond_temp1 ]]; then
+#
+	rm $HOME/Accuweather_conky_script/temp/curr_cond_temp1
+#
+  fi
+#  if [[ -f $HOME/Accuweather_conky_script/temp/curr_cond_control_point ]]; then
+#	rm $HOME/Accuweather_conky_script/temp/curr_cond_control_point
 #  fi
 
 #
@@ -1250,11 +1255,11 @@ sleep 0.5
 ###############################################################
 #del. raw files
 
-#  if [[ -f $HOME/Accuweather_conky_script/curr_cond_raw ]]; then
-#	rm $HOME/Accuweather_conky_script/curr_cond_raw
+#  if [[ -f $HOME/Accuweather_conky_script/temp/curr_cond_raw ]]; then
+#	rm $HOME/Accuweather_conky_script/temp/curr_cond_raw
 #  fi
-#  if [[ -f $HOME/Accuweather_conky_script/daily_forecast_raw ]]; then
-#	rm $HOME/Accuweather_conky_script/daily_forecast_raw
+#  if [[ -f $HOME/Accuweather_conky_script/temp/daily_forecast_raw ]]; then
+#	rm $HOME/Accuweather_conky_script/temp/daily_forecast_raw
 #  fi
 #  if [[ -f $HOME/Accuweather_conky_script/hourly_raw1 ]]; then
 #	rm $HOME/Accuweather_conky_script/hourly_raw1
