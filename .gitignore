@@ -1,3 +1,5 @@
+temp
+temp/*
 forecast_2015/*.png
 forecast_2016/*.png
 Forecast_Images_2016/svg2png
@@ -10,7 +12,9 @@ Acc_README.odt
 What_Is_What.odt
 curr_cond
 curr_cond_raw
-daily_forecast
+curr_cond_control_point
+daily_forecast*
+location
 hourly
 hourly_raw1
 hourly_raw2
