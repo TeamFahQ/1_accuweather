@@ -597,15 +597,15 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 	hourly_addr1="$(echo $address|sed 's/weather-forecast.*$//')"hourly-weather-forecast/"$last_number"
 	hourly_addr2="$(echo $address|sed 's/weather-forecast.*$//')"hourly-weather-forecast/"$last_number"?day=2
 
-	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/hourly_raw1 "$hourly_addr1"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/temp/hourly_raw1 "$hourly_addr1"
 
-	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/hourly_raw2 "$hourly_addr2"
+	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/temp/hourly_raw2 "$hourly_addr2"
 
-	if [[ -s $HOME/Accuweather_conky_script/hourly_raw1 && -s $HOME/Accuweather_conky_script/hourly_raw2 ]]; then
+	if [[ -s $HOME/Accuweather_conky_script/temp/hourly_raw1 && -s $HOME/Accuweather_conky_script/temp/hourly_raw2 ]]; then
 
-		cat $HOME/Accuweather_conky_script/hourly_raw1 $HOME/Accuweather_conky_script/hourly_raw2 > $HOME/Accuweather_conky_script/hourly_raw_temp
+		cat $HOME/Accuweather_conky_script/temp/hourly_raw1 $HOME/Accuweather_conky_script/temp/hourly_raw2 > $HOME/Accuweather_conky_script/temp/hourly_raw_temp
 
-	sed '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $HOME/Accuweather_conky_script/hourly_raw_temp > $HOME/Accuweather_conky_script/hourly
+	sed '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $HOME/Accuweather_conky_script/temp/hourly_raw_temp > $HOME/Accuweather_conky_script/hourly
 
 
 
@@ -1246,9 +1246,9 @@ sleep 0.5
 #  fi
 
 #
-  if [[ -f $HOME/Accuweather_conky_script/hourly_raw_temp ]]; then
+  if [[ -f $HOME/Accuweather_conky_script/temp/hourly_raw_temp ]]; then
 #
-	rm $HOME/Accuweather_conky_script/hourly_raw_temp
+	rm $HOME/Accuweather_conky_script/temp/hourly_raw_temp
 #
   fi
 
@@ -1261,11 +1261,11 @@ sleep 0.5
 #  if [[ -f $HOME/Accuweather_conky_script/temp/daily_forecast_raw ]]; then
 #	rm $HOME/Accuweather_conky_script/temp/daily_forecast_raw
 #  fi
-#  if [[ -f $HOME/Accuweather_conky_script/hourly_raw1 ]]; then
-#	rm $HOME/Accuweather_conky_script/hourly_raw1
+#  if [[ -f $HOME/Accuweather_conky_script/temp/hourly_raw1 ]]; then
+#	rm $HOME/Accuweather_conky_script/temp/hourly_raw1
 #  fi
-#  if [[ -f $HOME/Accuweather_conky_script/hourly_raw2 ]]; then
-#	rm $HOME/Accuweather_conky_script/hourly_raw2
+#  if [[ -f $HOME/Accuweather_conky_script/temp/hourly_raw2 ]]; then
+#	rm $HOME/Accuweather_conky_script/temp/hourly_raw2
 #  fi
 #
 
