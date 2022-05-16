@@ -21,7 +21,7 @@ pkill -STOP -xf "$weather_conky_launch_command"
 # Make the temp directories as needed
   [ -d $HOME/Accuweather_conky_script/temp ] || mkdir $HOME/Accuweather_conky_script/temp
   [ -d $HOME/Accuweather_conky_script/temp/images ] || mkdir $HOME/Accuweather_conky_script/temp/images
-  [ -d $HOME/Accuweather_conky_script/temp/hourly ] || mkdir $HOME/Accuweather_conky_script/temp/hourly
+  [ -d $HOME/Accuweather_conky_script/temp/images_hourly ] || mkdir $HOME/Accuweather_conky_script/temp/images_hourly
 
 #function: test_image
 test_image () {
@@ -605,79 +605,79 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 
 		cat $HOME/Accuweather_conky_script/temp/hourly_raw1 $HOME/Accuweather_conky_script/temp/hourly_raw2 > $HOME/Accuweather_conky_script/temp/hourly_raw_temp
 
-	sed '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $HOME/Accuweather_conky_script/temp/hourly_raw_temp > $HOME/Accuweather_conky_script/hourly
+	sed '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $HOME/Accuweather_conky_script/temp/hourly_raw_temp > $HOME/Accuweather_conky_script/temp/hourly
 
 
 
 #		#Hourly file
 #
-	sed -i '/div class=\"label-tooltip\" data-js=/,/div class=\"hourly-content-container/d' $HOME/Accuweather_conky_script/hourly
+	sed -i '/div class=\"label-tooltip\" data-js=/,/div class=\"hourly-content-container/d' $HOME/Accuweather_conky_script/temp/hourly
 
 #remove spaces and tabs in lines 
-#		sed -i -e 's/^[ \|\t]*//g' $HOME/Accuweather_conky_script/hourly
+#		sed -i -e 's/^[ \|\t]*//g' $HOME/Accuweather_conky_script/temp/hourly
 
-		sed -i '/div class=\"real-feel-mobile/,/<\/div>/d' $HOME/Accuweather_conky_script/hourly
+		sed -i '/div class=\"real-feel-mobile/,/<\/div>/d' $HOME/Accuweather_conky_script/temp/hourly
 
 #Поменять &#xAE;  на  <span class="value">space
-		sed -i -e 's/&#xAE;/<span class="value">space/g' $HOME/Accuweather_conky_script/hourly
+		sed -i -e 's/&#xAE;/<span class="value">space/g' $HOME/Accuweather_conky_script/temp/hourly
 		# и  к   space присоединить следующую строку(удалив space и \n- новая строка)
-		sed -i -z 's/space\n//g' $HOME/Accuweather_conky_script/hourly
+		sed -i -z 's/space\n//g' $HOME/Accuweather_conky_script/temp/hourly
 
-		sed -i '/Indoor Humidity\|Air Quality\|RealFeel Shade\|RealFeel Guide\|Ice/d' $HOME/Accuweather_conky_script/hourly
+		sed -i '/Indoor Humidity\|Air Quality\|RealFeel Shade\|RealFeel Guide\|Ice/d' $HOME/Accuweather_conky_script/temp/hourly
 
 #
-	sed -i '/class="date"\|weathericons\/\|temp metric\|RealFeel<span\|"phrase"\|Max UV Index\|Wind\|Wind Gusts\|Humidity\|Dew Point\|Cloud Cover\|Visibility\|Cloud Ceiling/!d' $HOME/Accuweather_conky_script/hourly
+	sed -i '/class="date"\|weathericons\/\|temp metric\|RealFeel<span\|"phrase"\|Max UV Index\|Wind\|Wind Gusts\|Humidity\|Dew Point\|Cloud Cover\|Visibility\|Cloud Ceiling/!d' $HOME/Accuweather_conky_script/temp/hourly
 
 ##adding empty lines for compatibility with the old config. file
 #date
-		sed -i -e 's/<\/span><\/h2>/\n--/g' $HOME/Accuweather_conky_script/hourly
+		sed -i -e 's/<\/span><\/h2>/\n--/g' $HOME/Accuweather_conky_script/temp/hourly
 
-		sed -i -e 's/<\/span>.*$//g' -e 's/\.svg.*$//g' -e 's/<\/div>.*$//g' -e 's/<span class="value">/\n/g' $HOME/Accuweather_conky_script/hourly
+		sed -i -e 's/<\/span>.*$//g' -e 's/\.svg.*$//g' -e 's/<\/div>.*$//g' -e 's/<span class="value">/\n/g' $HOME/Accuweather_conky_script/temp/hourly
 
-		sed -i -e 's/.*weathericons\///g' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/&#xAE;//g' -e 's/^[ \|\t]*//g' $HOME/Accuweather_conky_script/hourly
+		sed -i -e 's/.*weathericons\///g' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/&#xAE;//g' -e 's/^[ \|\t]*//g' $HOME/Accuweather_conky_script/temp/hourly
 
 
 		#Populate Max UV and Prec. Amount values where needed
 		i=1
 		while IFS= read -r line;
 			do
-				if [[ $(sed -n ${i}p $HOME/Accuweather_conky_script/hourly) == Wind ]]; then
+				if [[ $(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly) == Wind ]]; then
 					j=$((i-2))
-					if [[ $(sed -n ${j}p $HOME/Accuweather_conky_script/hourly) != 'Max UV Index' ]]; then
-						sed -i "${i}s/^/Max UV Index\n0\n/" $HOME/Accuweather_conky_script/hourly
+					if [[ $(sed -n ${j}p $HOME/Accuweather_conky_script/temp/hourly) != 'Max UV Index' ]]; then
+						sed -i "${i}s/^/Max UV Index\n0\n/" $HOME/Accuweather_conky_script/temp/hourly
 						((i+=3))
 					fi
-				elif [[ $(sed -n ${i}p $HOME/Accuweather_conky_script/hourly) == Visibility ]]; then
+				elif [[ $(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly) == Visibility ]]; then
 					j=$((i-2))
-					if [[ $(sed -n ${j}p $HOME/Accuweather_conky_script/hourly) != 'Rain' && $(sed -n ${j}p $HOME/Accuweather_conky_script/hourly) != 'Snow' ]]; then
-						sed -i "${i}s/^/Prec. Amount\n-\n/" $HOME/Accuweather_conky_script/hourly
+					if [[ $(sed -n ${j}p $HOME/Accuweather_conky_script/temp/hourly) != 'Rain' && $(sed -n ${j}p $HOME/Accuweather_conky_script/temp/hourly) != 'Snow' ]]; then
+						sed -i "${i}s/^/Prec. Amount\n-\n/" $HOME/Accuweather_conky_script/temp/hourly
 						((i+=3))
 					fi
 				fi
 			((i+=1))
-			done < $HOME/Accuweather_conky_script/hourly
+			done < $HOME/Accuweather_conky_script/temp/hourly
 
-		sed -i '/^$/d' $HOME/Accuweather_conky_script/hourly
+		sed -i '/^$/d' $HOME/Accuweather_conky_script/temp/hourly
 
 ##adding empty lines for compatibility with the old config. file 
-	sed -i '/Dew Point/i Indoor Hum.\n0' $HOME/Accuweather_conky_script/hourly
-	sed -i '/Max UV Index/i precip\n-\nNot' $HOME/Accuweather_conky_script/hourly
+	sed -i '/Dew Point/i Indoor Hum.\n0' $HOME/Accuweather_conky_script/temp/hourly
+	sed -i '/Max UV Index/i precip\n-\nNot' $HOME/Accuweather_conky_script/temp/hourly
 
 
-		sed -i '/^Further Ahead$/d' $HOME/Accuweather_conky_script/hourly
-		sed -i '721,$d' $HOME/Accuweather_conky_script/hourly
-		sed -i -e 's/ mph$\| km\/h$//g' -e 's/°.*$//g' $HOME/Accuweather_conky_script/hourly
+		sed -i '/^Further Ahead$/d' $HOME/Accuweather_conky_script/temp/hourly
+		sed -i '721,$d' $HOME/Accuweather_conky_script/temp/hourly
+		sed -i -e 's/ mph$\| km\/h$//g' -e 's/°.*$//g' $HOME/Accuweather_conky_script/temp/hourly
 
 
 ##### del image hourly
 	if [[ $hourly2015 == 1 ]]; then
-	  if [[ -f $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png ]]; then
-		rm $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png
+	  if [[ -f $HOME/Accuweather_conky_script/temp/images_hourly/hourly_*.png ]]; then
+		rm $HOME/Accuweather_conky_script/temp/images_hourly/hourly_*.png
 	  fi
 	fi
 	if [[ $hourly2016 == 1 ]]; then
-	  if [[ -f $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png ]]; then
-		rm $HOME/Accuweather_conky_script/temp/hourly/hourly_*.png
+	  if [[ -f $HOME/Accuweather_conky_script/temp/images_hourly/hourly_*.png ]]; then
+		rm $HOME/Accuweather_conky_script/temp/images_hourly/hourly_*.png
 	  fi
 	fi
 
@@ -685,20 +685,20 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 #	# Convert number image hourly  to  Weather font letter. Copy image clouds
 		for (( i=3; i<=720; i+=30 ))
 		  do
-		image=$(sed -n "${i}"p $HOME/Accuweather_conky_script/hourly)
-		echo $(test_image $image) >> $HOME/Accuweather_conky_script/hourly
-			  sed -i "$(( i+9 ))s/ .*$//" $HOME/Accuweather_conky_script/hourly
-			  sed -i "$(( i+17 ))s/ .*$//" $HOME/Accuweather_conky_script/hourly
+		image=$(sed -n "${i}"p $HOME/Accuweather_conky_script/temp/hourly)
+		echo $(test_image $image) >> $HOME/Accuweather_conky_script/temp/hourly
+			  sed -i "$(( i+9 ))s/ .*$//" $HOME/Accuweather_conky_script/temp/hourly
+			  sed -i "$(( i+17 ))s/ .*$//" $HOME/Accuweather_conky_script/temp/hourly
 		  done
 		if [[ $hourly0 == 0 ]]; then
 			j=1
 			for (( i=3; i<=720; i+=30 ))
 			  do
 		    	if [[ $hourly2015 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly).png $HOME/Accuweather_conky_script/temp/hourly/hourly_$j.png
+					cp $HOME/Accuweather_conky_script/Forecast_Images_2015/$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly).png $HOME/Accuweather_conky_script/temp/images_hourly/hourly_$j.png
 				fi
 				if [[ $hourly2016 == 1 ]]; then
-					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly).png $HOME/Accuweather_conky_script/temp/hourly/hourly_$j.png
+					cp $HOME/Accuweather_conky_script/Forecast_Images_2016/$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly).png $HOME/Accuweather_conky_script/temp/images_hourly/hourly_$j.png
 				fi
 		    	((j++))
 			  done
@@ -708,19 +708,19 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 	# Convert times in hourly from am/pm to freedom times
 	for (( i=1; i<=720; i+=30 ))
 		  do
-		   h=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			  sed -i ${i}s/^.*$/$(convert_time_h "$h")/ $HOME/Accuweather_conky_script/hourly
+		   h=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			  sed -i ${i}s/^.*$/$(convert_time_h "$h")/ $HOME/Accuweather_conky_script/temp/hourly
 #	# Add times in hourly  :0    ru version
-#		  sed -i ${i}s/^.*$/"$h":00/ $HOME/Accuweather_conky_script/hourly
+#		  sed -i ${i}s/^.*$/"$h":00/ $HOME/Accuweather_conky_script/temp/hourly
 		  done
 sleep 0.2
 	##convert Wind Direction hourly  to  Wind font letter hourly
-		echo 'Font letter wind  hourly ' >> $HOME/Accuweather_conky_script/hourly
+		echo 'Font letter wind  hourly ' >> $HOME/Accuweather_conky_script/temp/hourly
 			j=1
 		for (( i=14; i<=720; i+=30 ))
 		  do
-		   wind=$(sed -n "${i}"p $HOME/Accuweather_conky_script/hourly | awk '{print $1}')
-		   echo $(test_wind $wind) >> $HOME/Accuweather_conky_script/hourly
+		   wind=$(sed -n "${i}"p $HOME/Accuweather_conky_script/temp/hourly | awk '{print $1}')
+		   echo $(test_wind $wind) >> $HOME/Accuweather_conky_script/temp/hourly
 
 			((j++))
 		  done
@@ -731,322 +731,322 @@ sleep 0.2
 	# Full info, next 24h - altogether24 file
 
 #
-  if [[ -f $HOME/Accuweather_conky_script/altogether24 ]]; then
+  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24 ]]; then
 #
-	rm $HOME/Accuweather_conky_script/altogether24
-#
-  fi
-#
-  if [[ -f $HOME/Accuweather_conky_script/altogether24_2015 ]]; then
-#
-	rm $HOME/Accuweather_conky_script/altogether24_2015
+	rm $HOME/Accuweather_conky_script/temp/altogether24
 #
   fi
 #
-  if [[ -f $HOME/Accuweather_conky_script/altogether24_2016 ]]; then
+  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24_2015 ]]; then
 #
-	rm $HOME/Accuweather_conky_script/altogether24_2016
+	rm $HOME/Accuweather_conky_script/temp/altogether24_2015
+#
+  fi
+#
+  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24_2016 ]]; then
+#
+	rm $HOME/Accuweather_conky_script/temp/altogether24_2016
 #
   fi
 
 
 	#TIME
-	echo "\${color1}TIME\${goto 100}$(sed -n 1p $HOME/Accuweather_conky_script/hourly)" > $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}TIME\${goto 100}$(sed -n 1p $HOME/Accuweather_conky_script/temp/hourly)" > $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=160
 	for (( i=31; i<=360; i+=30 ))
 		do
-			time=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "1s/$/\${goto $jump_to}$time/" $HOME/Accuweather_conky_script/altogether24
+			time=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "1s/$/\${goto $jump_to}$time/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=361; i<=720; i+=30 ))
 			do
-				time=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "1s/$/\${goto $jump_to}$time/" $HOME/Accuweather_conky_script/altogether24
+				time=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "1s/$/\${goto $jump_to}$time/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
-	sed -i '1s/$/\n\n\n/' $HOME/Accuweather_conky_script/altogether24
+	sed -i '1s/$/\n\n\n/' $HOME/Accuweather_conky_script/temp/altogether24
 
 	#FORECAST
-	echo "\${color1}FORECAST\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}FORECAST\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=7; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly|awk '{print $1}'|cut -c1-8)
-			sed -i "5s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly|awk '{print $1}'|cut -c1-8)
+			sed -i "5s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=367; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly|awk '{print $1}'|cut -c1-8)
-				sed -i "5s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly|awk '{print $1}'|cut -c1-8)
+				sed -i "5s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
-	sed -i '5s/$/\n/' $HOME/Accuweather_conky_script/altogether24
+	sed -i '5s/$/\n/' $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=7; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly|awk '{print $2}'|cut -c1-8)
-			sed -i "6s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly|awk '{print $2}'|cut -c1-8)
+			sed -i "6s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=367; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly|awk '{print $2}'|cut -c1-8)
-				sed -i "6s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly|awk '{print $2}'|cut -c1-8)
+				sed -i "6s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#TEMPERATURE
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "TEMPER.\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "TEMPER.\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=4; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "8s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "8s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=364; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "8s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "8s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#REAL FEEL
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "REAL FEEL\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "REAL FEEL\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=6; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "10s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "10s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=366; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "10s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "10s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#CHANCE OF PRECIPITATION
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "PRECIP. %\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "PRECIP. %\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=9; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "12s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "12s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=369; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "12s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "12s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#MAX UV INDEX
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "UV INDEX\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "UV INDEX\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=12; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "14s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "14s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=372; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "14s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "14s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#WIND
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "WIND\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "WIND\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=14; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "16s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "16s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=374; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "16s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "16s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#WIND GUSTS
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "WIND GUSTS\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "WIND GUSTS\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=16; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "18s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "18s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=376; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "18s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "18s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#HUMIDITY
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "HUMIDITY\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "HUMIDITY\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=18; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "20s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "20s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=378; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "20s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "20s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#INDOOR HUMIDITY
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "IND. HUMID.\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "IND. HUMID.\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=20; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "22s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "22s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=380; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "22s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "22s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#DEW POINT
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "DEW POINT\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "DEW POINT\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=22; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "24s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "24s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=382; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "24s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "24s/$/\${goto $jump_to}$messg°/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#CLOUD COVER
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "CLOUD CVR\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "CLOUD CVR\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=24; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "26s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "26s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=384; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "26s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "26s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#PRECIPITATION AMOUNT
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "PREC. AM.\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "PREC. AM.\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=26; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "28s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "28s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=386; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "28s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "28s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#VISIBILITY
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "VISIBILITY\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "VISIBILITY\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=28; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "30s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "30s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=388; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "30s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "30s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
 
 	#CLOUD CEILING
-	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/altogether24
-	echo "CLOUD CEIL.\${color}" >> $HOME/Accuweather_conky_script/altogether24
+	echo "\${color1}\${goto 100}\${hr 1}" >> $HOME/Accuweather_conky_script/temp/altogether24
+	echo "CLOUD CEIL.\${color}" >> $HOME/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=30; i<=360; i+=30 ))
 		do
-			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-			sed -i "32s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+			messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+			sed -i "32s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 			((jump_to+=60))
 		done
 	if [[ $h_24hours == 1 ]]; then
 		for (( i=390; i<=720; i+=30 ))
 			do
-				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)
-				sed -i "32s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/altogether24
+				messg=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)
+				sed -i "32s/$/\${goto $jump_to}$messg/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 	fi
@@ -1055,23 +1055,23 @@ sleep 0.2
 	if [[ $hourly0 == 0 ]]; then
 		if [[ $hourly2015 == 1 ]]; then
 					jump_to=75
-					cp $HOME/Accuweather_conky_script/altogether24 $HOME/Accuweather_conky_script/altogether24_2015
+					cp $HOME/Accuweather_conky_script/temp/altogether24 $HOME/Accuweather_conky_script/temp/altogether24_2015
 		fi
 		if [[ $hourly2016 == 1 ]]; then
 					jump_to=85
-					cp $HOME/Accuweather_conky_script/altogether24 $HOME/Accuweather_conky_script/altogether24_2016
+					cp $HOME/Accuweather_conky_script/temp/altogether24 $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
-#  if [[ -f $HOME/Accuweather_conky_script/altogether24 ]]; then
-#		rm $HOME/Accuweather_conky_script/altogether24
+#  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24 ]]; then
+#		rm $HOME/Accuweather_conky_script/temp/altogether24
 #  fi
 		hours=$((12+$h_24hours*12))
 		for (( i=1; i<=$hours; i+=1 ))
 			do
 				if [[ $hourly2015 == 1 ]]; then
-					sed -i "4s/$/\${image \$HOME\/Accuweather_conky_script\/hourly_2015\/hourly_$i.png -s 60x36 -p $jump_to,49}/" $HOME/Accuweather_conky_script/altogether24_2015
+					sed -i "4s/$/\${image \$HOME\/Accuweather_conky_script\/hourly_2015\/hourly_$i.png -s 60x36 -p $jump_to,49}/" $HOME/Accuweather_conky_script/temp/altogether24_2015
 				fi
 				if [[ $hourly2016 == 1 ]]; then
-					sed -i "4s/$/\${image \$HOME\/Accuweather_conky_script\/hourly_2016\/hourly_$i.png -s 36x36 -p $jump_to,49}/" $HOME/Accuweather_conky_script/altogether24_2016
+					sed -i "4s/$/\${image \$HOME\/Accuweather_conky_script\/hourly_2016\/hourly_$i.png -s 36x36 -p $jump_to,49}/" $HOME/Accuweather_conky_script/temp/altogether24_2016
 				fi
 				((jump_to+=60))
 			done
@@ -1079,145 +1079,145 @@ sleep 0.2
 
 	#CONKYFONT
 	if [[ $hourly0 == 1 ]]; then
-		sed -i '4s/$/\${color}\${font conkyweather:size=35}/' $HOME/Accuweather_conky_script/altogether24
+		sed -i '4s/$/\${color}\${font conkyweather:size=35}/' $HOME/Accuweather_conky_script/temp/altogether24
 		jump_to=95
 		for (( i=721; i<=732; i+=1 ))
 			do
-				sed -i "4s/$/\${goto $jump_to}$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)/" $HOME/Accuweather_conky_script/altogether24
+				sed -i "4s/$/\${goto $jump_to}$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)/" $HOME/Accuweather_conky_script/temp/altogether24
 				((jump_to+=60))
 			done
 		if [[ $h_24hours == 1 ]]; then
 			for (( i=733; i<=744; i+=1 ))
 				do
-					sed -i "4s/$/\${goto $jump_to}$(sed -n ${i}p $HOME/Accuweather_conky_script/hourly)/" $HOME/Accuweather_conky_script/altogether24
+					sed -i "4s/$/\${goto $jump_to}$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/hourly)/" $HOME/Accuweather_conky_script/temp/altogether24
 					((jump_to+=60))
 				done
 		fi
-		sed -i '4s/$/\${font}/' $HOME/Accuweather_conky_script/altogether24
-		sed -i '2,3d' $HOME/Accuweather_conky_script/altogether24
+		sed -i '4s/$/\${font}/' $HOME/Accuweather_conky_script/temp/altogether24
+		sed -i '2,3d' $HOME/Accuweather_conky_script/temp/altogether24
 	fi
 
 	#DELETE UNWANTED VARIABLES
 	if [[ $h_real == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '7,8s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '7,8s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '9,10s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '9,10s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '9,10s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '9,10s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_uv == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '11,12s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '11,12s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '13,14s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '13,14s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '13,14s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '13,14s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_wind == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '13,14s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '13,14s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '15,16s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '15,16s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '15,16s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '15,16s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_wind_g == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '15,16s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '15,16s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '17,18s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '17,18s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '17,18s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '17,18s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 
 	if [[ $h_hum == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '17,18s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '17,18s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '19,20s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '19,20s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '19,20s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '19,20s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 
 	if [[ $h_ind_hum == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '19,20s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '19,20s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '21,22s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '21,22s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '21,22s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '21,22s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_dew == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '21,22s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '21,22s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '23,24s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '23,24s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '23,24s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '23,24s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_cl_cov == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '23,24s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '23,24s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '25,26s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '25,26s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '25,26s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '25,26s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_prec_am == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '25,26s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '25,26s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '27,28s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '27,28s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '27,28s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '27,28s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_visib == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '27,28s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '27,28s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '29,30s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '29,30s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '29,30s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '29,30s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
 	if [[ $h_cl_ceil == 0 ]]; then
 		if [[ $hourly0 == 1 ]]; then
-			sed -i '29,30s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24
+			sed -i '29,30s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24
 		elif [[ $hourly2015 == 1 ]]; then
-			sed -i '31,32s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2015
+			sed -i '31,32s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2015
 		elif [[ $hourly2016 == 1 ]]; then
-			sed -i '31,32s/^.*$/VOID/' $HOME/Accuweather_conky_script/altogether24_2016
+			sed -i '31,32s/^.*$/VOID/' $HOME/Accuweather_conky_script/temp/altogether24_2016
 		fi
 	fi
 
-  if [[ -f $HOME/Accuweather_conky_script/altogether24 ]]; then
-	sed -i '/VOID/d' $HOME/Accuweather_conky_script/altogether24
+  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24 ]]; then
+	sed -i '/VOID/d' $HOME/Accuweather_conky_script/temp/altogether24
   fi
-  if [[ -f $HOME/Accuweather_conky_script/altogether24_2015 ]]; then
-	sed -i '/VOID/d' $HOME/Accuweather_conky_script/altogether24_2015
+  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24_2015 ]]; then
+	sed -i '/VOID/d' $HOME/Accuweather_conky_script/temp/altogether24_2015
   fi
-  if [[ -f $HOME/Accuweather_conky_script/altogether24_2016 ]]; then
-	sed -i '/VOID/d' $HOME/Accuweather_conky_script/altogether24_2016
+  if [[ -f $HOME/Accuweather_conky_script/temp/altogether24_2016 ]]; then
+	sed -i '/VOID/d' $HOME/Accuweather_conky_script/temp/altogether24_2016
   fi
 
 
