@@ -1,48 +1,44 @@
-- Moved hourly outputs to temp
-- Adding a TODO file to track future/planned changes
-- accuweather:Move hourly temp files to temp dir
-- .Myconkyrc udpated for new temp path
-- Cleanup:Move temp files to their own directory
-- Pruning unnecessary files and folders && Staging for script overhaul
-- .Myconkyrc: update nvidia-settings to get fan speeds
-- rename .conkyrc to .Myconkyrc. Sharing my .conkyrc is just an example for others. It is also a way for me to track my changes
-- Update .gitignore
-- Update script from il.harun: This is a complete rebase on the tree because the original update added way too many extra files. This is much cleaner and easier to track
-- conky.rc:Updating for new hardware and background image. Made background partially transparent
-- conkyrc:update GPU information. Add line to display both fan speeds
-- .conkyrc:Moved here and smlinked to home.
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Update location
-- September 2021 Hourly Weather Change
-- September 2021 Hourly Weather Change
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Wintercast bug
-- Wintercast bug
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Tiny change to the daily forecast part
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Corrected tending arrow in front of pressure value
-- Corrected moonrise/set values
-- Corrected sunrise/set, moonrise/set times
-- Just another layout change
-- Update script with tester
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Daily forecast corrected
-- Hourly forecast changed
-- Corrected hourly weather-removed indoor humidity info
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Fixed hourly forecast
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Current weather corrected
-- Changed Thurday to ThurSday
-- Corrected the daily forecast part of the script
-- Fixed hourly forecast
-- Fixed hourly forecast
-- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
-- Update
-- Fixed missing moonrise or moonset
-- Remember to use https and not http
-- Switched to curl-enhancements to the current weather section
-- Fixed current conditions' section
-- New Repository
+5f4ea25 Thomas Raines 2022-05-17 changelog.mk: Add date and author when creating CHANGELOG
+a797f13 Thomas Raines 2022-05-16 Create CHANGELOG script and rework CHANGELOG
+ae60177 Thomas Raines 2022-05-15 .Myconkyrc: update nvidia-settings to get fan speeds
+aed4fc7 Thomas Raines 2022-05-15 rename .conkyrc to .Myconkyrc. Sharing my .conkyrc is just an example for others. It is also a way for me to track my changes
+de90b67 Thomas Raines 2022-05-15 Update .gitignore
+2f00212 Thomas Raines 2022-05-15 Update script from il.harun: This is a complete rebase on the tree because the original update added way too many extra files. This is much cleaner and easier to track
+b463f36 Thomas Raines 2022-01-13 conky.rc:Updating for new hardware and background image. Made background partially transparent
+177b1f7 Thomas Raines 2021-12-06 conkyrc:update GPU information. Add line to display both fan speeds
+96e4c2b Thomas Raines 2021-12-02 .conkyrc:Moved here and smlinked to home.
+02fd667 Thomas Raines 2021-10-11 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+40d0ae3 Thomas Raines 2021-10-11 Update location
+e9daf60 teobigusgeekus 2021-09-17 September 2021 Hourly Weather Change
+15a9ecf teobigusgeekus 2021-09-17 September 2021 Hourly Weather Change
+37bbec8 Thomas Raines 2021-02-14 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+c72fd8b teobigusgeekus 2021-02-11 Wintercast bug
+a184b1a teobigusgeekus 2021-02-11 Wintercast bug
+d079d76 Thomas Raines 2021-01-22 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+7d5b074 teobigusgeekus 2021-01-22 Tiny change to the daily forecast part
+8bddd23 Thomas Raines 2021-01-19 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+7932d9c teobigusgeekus 2021-01-07 Corrected tending arrow in front of pressure value
+6b8031b teobigusgeekus 2020-12-16 Corrected moonrise/set values
+2683351 teobigusgeekus 2020-09-25 Corrected sunrise/set, moonrise/set times
+565135d teobigusgeekus 2020-09-24 Just another layout change
+9ec88a3 Thomas Raines 2020-09-09 Update script with tester
+358fd5f Thomas Raines 2020-07-21 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+0527a04 teobigusgeekus 2020-07-21 Daily forecast corrected
+56c9ec7 teobigusgeekus 2020-07-09 Hourly forecast changed
+a5915c5 teobigusgeekus 2020-05-25 Corrected hourly weather-removed indoor humidity info
+add582e Thomas Raines 2020-02-12 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+39c9b1a teobigusgeekus 2020-02-06 Fixed hourly forecast
+227a035 Thomas Raines 2019-12-28 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+68eea5b Thomas Raines 2019-12-28 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+ba240b2 teobigusgeekus 2019-12-19 Current weather corrected
+98d966a teobigusgeekus 2019-12-17 Changed Thurday to ThurSday
+8210550 teobigusgeekus 2019-11-24 Corrected the daily forecast part of the script
+079e760 teobigusgeekus 2019-11-08 Fixed hourly forecast
+a6cf871 teobigusgeekus 2019-11-08 Fixed hourly forecast
+2008b4b Thomas Raines 2019-10-26 Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+5380be1 Thomas Raines 2019-10-26 Update
+900bcea teobigusgeekus 2019-10-22 Fixed missing moonrise or moonset
+5d17e0e teobigusgeekus 2019-10-19 Remember to use https and not http
+6c2d52c teobigusgeekus 2019-10-17 Switched to curl-enhancements to the current weather section
+dbca698 teobigusgeekus 2019-10-15 Fixed current conditions' section
+3faadfc teobigusgeekus 2019-10-13 New Repository
