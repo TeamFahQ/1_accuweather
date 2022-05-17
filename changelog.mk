@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git log --pretty="- %s" > CHANGELOG
+git log --pretty=format:"%h %an %ad %s" --date=short > CHANGELOG
