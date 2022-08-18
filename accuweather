@@ -344,7 +344,7 @@ sleep 0.2
 	#current conditions
 	if [[ -s $HOME/Accuweather_conky_script/temp/curr_cond_raw ]]; then
 
-		sed '/current-weather-card card-module content-module non-ad/,/glacier-ad /!d' $HOME/Accuweather_conky_script/temp/curr_cond_raw > $HOME/Accuweather_conky_script/temp/curr_cond_temp
+		sed '/current-weather-card/,/glacier-ad /!d' $HOME/Accuweather_conky_script/temp/curr_cond_raw > $HOME/Accuweather_conky_script/temp/curr_cond_temp
 
 sed -i '/div class=\"label-tooltip\" data-js/,/div class=\"current-weather-details/d' $HOME/Accuweather_conky_script/temp/curr_cond_temp
 		sed -i -e 's/\.svg.*$//g' -e 's/<\/div>//g' -e 's/<div>//g' -e 's/<\/span>//g' -e 's/<span class.*$//g' -e 's/^[\t]*//g' $HOME/Accuweather_conky_script/temp/curr_cond_temp
