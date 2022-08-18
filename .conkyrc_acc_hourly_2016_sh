@@ -1,0 +1,121 @@
+
+# -- Conky start -- #
+##sh -c "cd ~/Accuweather_conky_script && sleep 2 && conky -c ./.conkyrc_acc_hourly_2016_sh"
+##cd ~/Accuweather_conky_script && conky -p 2 -c ./.conkyrc_acc_hourly_2016_sh
+#
+#conky -p 2 -c ~/Accuweather_conky_script/.conkyrc_acc_hourly_2016_sh
+#sh -c "sleep 2 && conky -c /home/ilia/.conkyrc1 && conky -c /home/ilia/.conkyrc2"#
+#sh -c "sleep 2 && conky -c /home/ilia/conkyrc"#
+#
+#https://forums.bunsenlabs.org/viewtopic.php?id=189
+# conky configuration
+##
+    background yes
+    update_interval 10
+    cpu_avg_samples 2
+    net_avg_samples 2
+
+    override_utf8_locale yes
+
+    double_buffer yes
+    no_buffers yes
+
+    max_user_text 20000
+    text_buffer_size 8096
+    imlib_cache_size 0
+
+    # -- Window specifications -- #
+###ubuntu 1404
+#
+own_window yes
+#
+own_window_type normal
+#
+own_window_class Conky
+#
+own_window_argb_visual yes
+#
+own_window_argb_value 250
+#
+own_window_transparent yes
+#own_window_transparent no
+#own_window_colour 000000
+#
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+###ubuntu 1204
+#    own_window yes
+#    own_window_type override
+#    own_window_transparent yes
+#    own_window_hints undecorated,sticky,skip_taskbar,skip_pager,below
+
+
+    border_inner_margin 8
+    border_outer_margin 0
+
+    #Minimum size of text area
+    minimum_size 1550 400
+    maximum_width 1550
+    
+    # Text alignment, other possible values are commented
+#   alignment top_left
+#
+    alignment top_right
+#   alignment bottom_left
+#   alignment bottom_right
+
+    # Gap between borders of screen and text
+    # same thing as passing -x at command line
+     gap_x 50   ### left &right
+     gap_y 40    ### up & down
+
+    # -- Graphics settings -- #
+    draw_shades no
+    draw_outline no
+    draw_borders no
+    draw_graph_borders yes
+
+    # -- Text settings -- #
+    use_xft yes
+#    xftfont MaiandraGD:size=8
+#
+	xftfont  Arial:size=9
+#    xftfont Ubuntu:size=9
+    xftalpha 1
+
+    short_units yes
+    temperature_unit celsius
+#    top_name_width 20
+
+
+    uppercase no
+
+    default_color f0f0f0
+   # colors
+#   color1 778899 # LightSlateGrey
+   color1 ffe595 #
+   color2 6892C6 # LightBlue
+   color3 FC8820 # Orange
+   color4 78BF39 # Green
+   color5 FFDEAD # NavajoWhite
+   color6 EBE651 # Deep Yellow
+   color7 697AFF # Ice Blue
+   color8 29CC29 # Pale Dark Green
+   color9 6ECBF5 # Ubuntu Studio Color
+
+# -- Lua load -- #
+#
+  lua_load ./bg.lua
+
+
+TEXT
+#${texeci 1800 bash $HOME/Accuweather_conky_script/accuweather -h2016}#
+${font Arial:size=11}${color1}HOURLY ${execi 60 sed -n '1p' $HOME/Accuweather_conky_script/location | awk '{print $1,$2,$3,$4}'} ${font}${hr 2}
+
+#
+${lua conky_draw_bg 15 0 0 0 0 0x000000 0,7}#
+#${texeci 1800 bash $HOME/Accuweather_conky_script/accuweather -h2016}#
+#
+${texecpi 60 sed -n '1,32p' $HOME/Accuweather_conky_script/altogether24_2016}
+
+
