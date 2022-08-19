@@ -1,7 +1,18 @@
+5450232 Thomas Raines 2022-08-19 Merge branch 'rebase' of https://github.com/TeamFahQ/1_accuweather
+3c81833 Thomas Raines 2022-08-18 updating with Huran changes 8-17-2022
 6c358d3 Thomas Raines 2022-05-17 Generate new CHANGELOG with new format. Remove test file
 5f4ea25 Thomas Raines 2022-05-17 changelog.mk: Add date and author when creating CHANGELOG
 a797f13 Thomas Raines 2022-05-16 Create CHANGELOG script and rework CHANGELOG
+10d0d29 Thomas Raines 2022-05-17 changelog.mk: Add date and author when creating CHANGELOG
+fd93f07 Thomas Raines 2022-05-16 Create CHANGELOG script and rework CHANGELOG
+d6e4224 Thomas Raines 2022-05-16 Moved hourly outputs to temp
+4fa619b Thomas Raines 2022-05-15 Adding a TODO file to track future/planned changes
+e474957 Thomas Raines 2022-05-15 accuweather:Move hourly temp files to temp dir
+39030c1 Thomas Raines 2022-05-15 .Myconkyrc udpated for new temp path
+2b8ce75 Thomas Raines 2022-05-15 Cleanup:Move temp files to their own directory
+73a0c14 Thomas Raines 2022-05-15 Pruning unnecessary files and folders && Staging for script overhaul
 ae60177 Thomas Raines 2022-05-15 .Myconkyrc: update nvidia-settings to get fan speeds
+9ee3411 Thomas Raines 2022-05-15 .Myconkyrc: update nvidia-settings to get fan speeds
 aed4fc7 Thomas Raines 2022-05-15 rename .conkyrc to .Myconkyrc. Sharing my .conkyrc is just an example for others. It is also a way for me to track my changes
 de90b67 Thomas Raines 2022-05-15 Update .gitignore
 2f00212 Thomas Raines 2022-05-15 Update script from il.harun: This is a complete rebase on the tree because the original update added way too many extra files. This is much cleaner and easier to track
