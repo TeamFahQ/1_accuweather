@@ -1,0 +1,113 @@
+conky.config = {
+--# -- Conky start -- #
+--##sh -c "cd ~/Accuweather_conky_script && sleep 2 && conky -c ./.conkyrc_acc_hourly_weatherfont"
+--##cd ~/Accuweather_conky_script && conky -p 2 -c ./.conkyrc_acc_hourly_weatherfont
+--#
+--#conky -p 2 -c ~/Accuweather_conky_script/.conkyrc_acc_hourly_weatherfont
+--#sh -c "sleep 2 && conky -c /home/ilia/.conkyrc1 && conky -c /home/ilia/.conkyrc2"#
+--#sh -c "sleep 2 && conky -c /home/ilia/conkyrc"#
+--#
+--#https://forums.bunsenlabs.org/viewtopic.php?id=189
+--# conky configuration
+--
+--
+-- Create own window instead of using desktop (required in nautilus)
+	own_window = true,
+	own_window_type = 'normal',
+-- ARGB can be used for real transparency,
+-- note that a composite manager is required for real transparency
+-- Set the transparency alpha value from 0 to 255
+--
+	own_window_argb_visual = true,
+--
+	own_window_argb_value = 250,	
+
+--
+	own_window_transparent = true,
+--	own_window_transparent = false,
+--	own_window_colour = '000000',
+	own_window_hints = 'undecorated,below,skip_taskbar,skip_pager,sticky',
+
+-- Use double buffering (reduces flicker, may not work for everyone)
+	double_buffer = true,
+
+-- fiddle with window
+	use_spacer = 'right',
+	use_xft = true,
+
+-- Update interval in seconds
+	update_interval = 3,
+
+-- Minimum size of text area
+	minimum_width = 1530, minimum_height = 0,
+	maximum_width = 1530,
+
+	override_utf8_locale = true,
+
+-- Draw shades?
+--	draw_shades = true,
+
+-- Text stuff
+--	draw_outline = true,-- amplifies text if yes
+	draw_borders = false,
+--font freesans -12
+	font = 'Arial:size=9',
+	uppercase = false,-- set to yes if you want all text to be in uppercase
+
+-- Stippled borders?
+	stippled_borders = 3,
+
+-- border margins
+	border_inner_margin = 9,
+
+-- border width
+	border_width = 10,
+
+-- Default colors and also border colors, grey90 == #e5e5e5
+	default_color = '#cbcbcb',
+	color1 = '#ffe595',
+
+--	own_window_colour = 'brown',
+
+-- Text alignment, other possible values are commented
+--	alignment = 'top_left',
+  alignment = 'top_right',
+--alignment = 'bottom_left',
+-- alignment = 'bottom_right' ,
+
+-- Gap between borders of screen and text
+	gap_x = 10,
+	gap_y = 40,
+
+	background = true,
+
+	imlib_cache_size = 0,
+	text_buffer_size = 4096,
+
+-- # -- Lua load -- #
+--
+	lua_load = './bg.lua',
+
+-- stuff after 'TEXT' will be formatted on screen
+
+};
+
+conky.text = [[
+${font Arial:size=11}${color1}HOURLY ${execi 60 sed -n '1p' $HOME/Accuweather_conky_script/location | awk '{print $1,$2,$3,$4}'} ${font}${hr 2}
+
+#
+${lua conky_draw_bg 15 0 0 0 0 0x000000 0,5}#
+########################################
+#
+${execi 1800 bash $HOME/Accuweather_conky_script/accuweather -h}#
+#
+${execpi 60 sed -n '1,32p' $HOME/Accuweather_conky_script/altogether24}
+#########################################
+#${texeci 1800 bash $HOME/Accuweather_conky_script/conkyconfig/Accuweather/accuweather -h}#
+#${texecpi 60 sed -n '1,32p' $HOME/Accuweather_conky_script/altogether24}
+#########################################
+#${texeci 1800 bash $HOME/Accuweather_conky_script/conkyconfig/Accuweather/accuweather_en -h}#
+#${execpi 60 sed -n '1,32p' /tmp/accuweather_en/altogether24}
+#########################################
+
+]];

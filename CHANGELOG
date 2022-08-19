@@ -1,3 +1,4 @@
+6c358d3 Thomas Raines 2022-05-17 Generate new CHANGELOG with new format. Remove test file
 5f4ea25 Thomas Raines 2022-05-17 changelog.mk: Add date and author when creating CHANGELOG
 a797f13 Thomas Raines 2022-05-16 Create CHANGELOG script and rework CHANGELOG
 ae60177 Thomas Raines 2022-05-15 .Myconkyrc: update nvidia-settings to get fan speeds

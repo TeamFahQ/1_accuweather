@@ -1,0 +1,48 @@
+- Moved hourly outputs to temp
+- Adding a TODO file to track future/planned changes
+- accuweather:Move hourly temp files to temp dir
+- .Myconkyrc udpated for new temp path
+- Cleanup:Move temp files to their own directory
+- Pruning unnecessary files and folders && Staging for script overhaul
+- .Myconkyrc: update nvidia-settings to get fan speeds
+- rename .conkyrc to .Myconkyrc. Sharing my .conkyrc is just an example for others. It is also a way for me to track my changes
+- Update .gitignore
+- Update script from il.harun: This is a complete rebase on the tree because the original update added way too many extra files. This is much cleaner and easier to track
+- conky.rc:Updating for new hardware and background image. Made background partially transparent
+- conkyrc:update GPU information. Add line to display both fan speeds
+- .conkyrc:Moved here and smlinked to home.
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Update location
+- September 2021 Hourly Weather Change
+- September 2021 Hourly Weather Change
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Wintercast bug
+- Wintercast bug
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Tiny change to the daily forecast part
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Corrected tending arrow in front of pressure value
+- Corrected moonrise/set values
+- Corrected sunrise/set, moonrise/set times
+- Just another layout change
+- Update script with tester
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Daily forecast corrected
+- Hourly forecast changed
+- Corrected hourly weather-removed indoor humidity info
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Fixed hourly forecast
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Current weather corrected
+- Changed Thurday to ThurSday
+- Corrected the daily forecast part of the script
+- Fixed hourly forecast
+- Fixed hourly forecast
+- Merge branch 'master' of https://gitlab.com/teobigusgeekus/accuweather_conky_script
+- Update
+- Fixed missing moonrise or moonset
+- Remember to use https and not http
+- Switched to curl-enhancements to the current weather section
+- Fixed current conditions' section
+- New Repository
