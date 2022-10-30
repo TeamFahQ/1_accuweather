@@ -522,6 +522,9 @@ sleep 0.2
 
 		sed -i '/WinterCast/,+1d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
+        sed -i '/connatixEl/,+2d' $HOME/Accuweather_conky_script/temp/daily_forecast
+
+        sed -i '/}/,+1d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
 		sed -i '85,$d' $HOME/Accuweather_conky_script/temp/daily_forecast
 #
