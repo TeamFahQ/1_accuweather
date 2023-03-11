@@ -350,7 +350,9 @@ sleep 0.2
 
 		sed -i '/div class=\"label-tooltip\" data-js/,/div class=\"current-weather-details/d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 		sed -i -e 's/\.svg.*$//g' -e 's/<\/div>//g' -e 's/<div>//g' -e 's/<\/span>//g' -e 's/<span class.*$//g' -e 's/^[\t]*//g' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
-		sed -i -e 's/.*weathericons\///' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/.*RealFeel&#xAE; //g' -e '/RealFeel Shade™/,+1d' -e '/Indoor Humidity/,+1d' -e '/^$/d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
+
+		sed -i -e 's/.*weathericons\///' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/&#x2122;.*$//g' -e 's/.*RealFeel&#xAE; //g' -e 's/&#xAE;.*$//g'  -e '/RealFeel Shade/,+1d' -e '/RealFeel/,+1d' -e '/Indoor Humidity/,+1d' -e 's/^&#x2191; //g' -e '/^$/d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
+
 #
 		sed -i '1s/^0//' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 
@@ -372,7 +374,7 @@ cp $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp $CONKY_DIR/Accuweathe
 		sed -i '8s/ /\n/1' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 
 
-		sed '/sunrise-sunset card-module content-module/,/temp-history content-module/!d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_raw > $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp1
+		sed '/sunrise-sunset  card-module content-module/,/temp-history content-module/!d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_raw > $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp1
 
 		sed -i -e 's/.*"text-value">//g' -e 's/<\/span>$//g' -e '/</d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp1
 #
