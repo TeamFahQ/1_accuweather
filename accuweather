@@ -618,12 +618,13 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 
 #		#Hourly file
 #
-		sed -i '/div class=\"label-tooltip\" data-js=/,/div class=\"hourly-content-container/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed -i '/div class=\"label-tooltip\" data-js=/,/-content-container/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 #remove spaces and tabs in lines
 #		sed -i -e 's/^[ \|\t]*//g' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 		sed -i '/div class=\"real-feel-mobile/,/<\/div>/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed -i '/.*<p>RealFeel/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 #Поменять &#xAE;  на  <span class="value">space
 		sed -i -e 's/&#xAE;/<span class="value">space/g' $CONKY_DIR/Accuweather_conky_script/temp/hourly
@@ -1075,10 +1076,10 @@ sleep 0.2
 		for (( i=1; i<=$hours; i+=1 ))
 			do
 				if [[ $hourly2015 == 1 ]]; then
-					sed -i "4s/$/\${image \$HOME\/Accuweather_conky_script\/hourly_2015\/hourly_$i.png -s 60x36 -p $jump_to,49}/" $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2015
+					sed -i "4s/$/\${image \$HOME\/.conky\/Accuweather_conky_script\/temp\/images_hourly\/hourly_$i.png -s 60x36 -p $jump_to,49}/" $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2015
 				fi
 				if [[ $hourly2016 == 1 ]]; then
-					sed -i "4s/$/\${image \$HOME\/Accuweather_conky_script\/hourly_2016\/hourly_$i.png -s 36x36 -p $jump_to,49}/" $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2016
+					sed -i "4s/$/\${image \$HOME\/.conky\/Accuweather_conky_script\/temp\/images_hourly\/hourly_$i.png -s 36x36 -p $jump_to,49}/" $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2016
 				fi
 				((jump_to+=60))
 			done
