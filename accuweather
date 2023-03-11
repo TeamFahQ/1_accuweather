@@ -181,7 +181,7 @@ test_image () {
 # Check the user arguments #
 ############################
 
-if (( $# < 1 || $# > 18 )); then
+if (( $# < 1 || $# > 19 )); then
 	echo "Invalid arguments!"
 	exit
 fi
@@ -204,10 +204,11 @@ h_cl_cov=1
 h_prec_am=1
 h_visib=1
 h_cl_ceil=1
+h_forecast=1
 
 for i in $*
 	do
-		if [[ $i != -f && $i != -f2015 && $i != -f2016 && $i != -h && $i != -h2015 && $i != -h2016 && $i != -h_12h && $i != -h_no_real && $i != -h_no_uv && $i != -h_no_wind && $i != -h_no_wind_g && $i != -h_no_hum && $i != -h_no_ind_hum && $i != -h_no_dew && $i != -h_no_cl_cov && $i != -h_no_prec_am && $i != -h_no_visib && $i != -h_no_cl_ceil ]]; then
+		if [[ $i != -f && $i != -f2015 && $i != -f2016 && $i != -h && $i != -h2015 && $i != -h2016 && $i != -h_12h && $i != -h_no_real && $i != -h_no_uv && $i != -h_no_wind && $i != -h_no_wind_g && $i != -h_no_hum && $i != -h_no_ind_hum && $i != -h_no_dew && $i != -h_no_cl_cov && $i != -h_no_prec_am && $i != -h_no_visib && $i != -h_no_cl_ceil && $i != -h_no_forecast ]]; then
 			echo "Invalid arguments!"
 			exit
 		fi
@@ -265,6 +266,9 @@ for i in $*
 			;;
 			-h_no_cl_ceil)
 				h_cl_ceil=0
+			;;
+			-h_no_forecast)
+				h_forecast=0
 			;;
 		esac
 	done
@@ -1228,7 +1232,17 @@ sleep 0.2
 	sed -i '/VOID/d' $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2016
   fi
 
+	if [[ $h_forecast == 0 ]]; then
+		if [[ $hourly0 == 1 ]]; then
+			sed -i '5,6s/^.*$/VOID/' $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+		elif [[ $hourly2015 == 1 ]]; then
+			sed -i '5,6s/^.*$/VOID/' $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2015
+		elif [[ $hourly2016 == 1 ]]; then
+			sed -i '5,6s/^.*$/VOID/' $CONKY_DIR/Accuweather_conky_script/temp/altogether24_2016
+		fi
+	fi
 
+	sed -i '/VOID/d' $CONKY_DIR/Accuweather_conky_script/temp/{altogether24,altogether24_2015,altogether24_2016}
 
 fi
 
