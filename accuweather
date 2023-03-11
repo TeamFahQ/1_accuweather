@@ -121,59 +121,59 @@ test_image () {
 
 	#function: test_wind
 	test_wind () {
-	    case $1 in
-	         CLM)
-	           echo \-
-	         ;;
-	         S)
-	           echo 1
-	         ;;
-	         SSW)
-	           echo 2
-	         ;;
-	         SW)
-	           echo 3
-	         ;;
-	         WSW)
-	           echo 4
-	         ;;
-	         W)
-	           echo 5
-	         ;;
-	         WNW)
-	           echo 6
-	         ;;
-	         NW)
-	           echo 7
-	         ;;
-	         NNW)
-	           echo 8
-	         ;;
-	         N)
-	           echo 9
-	         ;;
-	         NNE)
-	           echo \:
-	         ;;
-	         NE)
-	           echo \;
-	         ;;
-	         ENE)
-	           echo \<
-	         ;;
-	         E)
-	           echo \=
-	         ;;
-	         ESE)
-	           echo \>
-	         ;;
-	         SE)
-	           echo \?
-	         ;;
-	         SSE)
-	           echo \@
-	         ;;
-	    esac
+		case $1 in
+			 CLM)
+			   echo \-
+			 ;;
+			 S)
+			   echo 1
+			 ;;
+			 SSW)
+			   echo 2
+			 ;;
+			 SW)
+			   echo 3
+			 ;;
+			 WSW)
+			   echo 4
+			 ;;
+			 W)
+			   echo 5
+			 ;;
+			 WNW)
+			   echo 6
+			 ;;
+			 NW)
+			   echo 7
+			 ;;
+			 NNW)
+			   echo 8
+			 ;;
+			 N)
+			   echo 9
+			 ;;
+			 NNE)
+			   echo \:
+			 ;;
+			 NE)
+			   echo \;
+			 ;;
+			 ENE)
+			   echo \<
+			 ;;
+			 E)
+			   echo \=
+			 ;;
+			 ESE)
+			   echo \>
+			 ;;
+			 SE)
+			   echo \?
+			 ;;
+			 SSE)
+			   echo \@
+			 ;;
+		esac
 	}
 
 
@@ -348,7 +348,7 @@ sleep 0.2
 
 		sed '/current-weather-card/,/glacier-ad /!d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_raw > $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 
-sed -i '/div class=\"label-tooltip\" data-js/,/div class=\"current-weather-details/d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
+		sed -i '/div class=\"label-tooltip\" data-js/,/div class=\"current-weather-details/d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 		sed -i -e 's/\.svg.*$//g' -e 's/<\/div>//g' -e 's/<div>//g' -e 's/<\/span>//g' -e 's/<span class.*$//g' -e 's/^[\t]*//g' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 		sed -i -e 's/.*weathericons\///' -e 's/^.*>//g' -e 's/&#xB0;.*$//g' -e 's/.*RealFeel&#xAE; //g' -e '/RealFeel Shade™/,+1d' -e '/Indoor Humidity/,+1d' -e '/^$/d' $CONKY_DIR/Accuweather_conky_script/temp/curr_cond_temp
 #
@@ -610,13 +610,13 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 
 		cat $CONKY_DIR/Accuweather_conky_script/temp/hourly_raw1 $CONKY_DIR/Accuweather_conky_script/temp/hourly_raw2 > $CONKY_DIR/Accuweather_conky_script/temp/hourly_raw_temp
 
-	sed '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $CONKY_DIR/Accuweather_conky_script/temp/hourly_raw_temp > $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed '/<div class=\"hourly-wrapper content-module\">/,/day=/!d' $CONKY_DIR/Accuweather_conky_script/temp/hourly_raw_temp > $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 
 
 #		#Hourly file
 #
-	sed -i '/div class=\"label-tooltip\" data-js=/,/div class=\"hourly-content-container/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed -i '/div class=\"label-tooltip\" data-js=/,/div class=\"hourly-content-container/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 #remove spaces and tabs in lines
 #		sed -i -e 's/^[ \|\t]*//g' $CONKY_DIR/Accuweather_conky_script/temp/hourly
@@ -631,7 +631,7 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 		sed -i '/Indoor Humidity\|Air Quality\|RealFeel Shade\|RealFeel Guide\|Ice/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 #
-	sed -i '/class="date"\|weathericons\/\|temp metric\|RealFeel<span\|"phrase"\|Max UV Index\|Wind\|Wind Gusts\|Humidity\|Dew Point\|Cloud Cover\|Visibility\|Cloud Ceiling/!d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed -i '/class="date"\|weathericons\/\|temp metric\|RealFeel<span\|"phrase"\|Max UV Index\|Wind\|Wind Gusts\|Humidity\|Dew Point\|Cloud Cover\|Visibility\|Cloud Ceiling/!d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 ##adding empty lines for compatibility with the old config. file
 #date
@@ -665,8 +665,8 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 		sed -i '/^$/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 ##adding empty lines for compatibility with the old config. file
-	sed -i '/Dew Point/i Indoor Hum.\n0' $CONKY_DIR/Accuweather_conky_script/temp/hourly
-	sed -i '/Max UV Index/i precip\n-\nNot' $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed -i '/Dew Point/i Indoor Hum.\n0' $CONKY_DIR/Accuweather_conky_script/temp/hourly
+		sed -i '/Max UV Index/i precip\n-\nNot' $CONKY_DIR/Accuweather_conky_script/temp/hourly
 
 
 		sed -i '/^Further Ahead$/d' $CONKY_DIR/Accuweather_conky_script/temp/hourly
@@ -675,16 +675,16 @@ if [[ $hourly0 == 1 || $hourly2015 == 1 || $hourly2016 == 1 ]]; then
 
 
 ##### del image hourly
-	if [[ $hourly2015 == 1 ]]; then
-	  if [[ -f $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png ]]; then
-		rm $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png
-	  fi
-	fi
-	if [[ $hourly2016 == 1 ]]; then
-	  if [[ -f $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png ]]; then
-		rm $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png
-	  fi
-	fi
+		if [[ $hourly2015 == 1 ]]; then
+		  if [[ -f $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png ]]; then
+			rm $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png
+		  fi
+		fi
+		if [[ $hourly2016 == 1 ]]; then
+		  if [[ -f $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png ]]; then
+			rm $CONKY_DIR/Accuweather_conky_script/temp/images_hourly/hourly_*.png
+		  fi
+		fi
 
 
 #	# Convert number image hourly  to  Weather font letter. Copy image clouds
@@ -776,7 +776,7 @@ sleep 0.2
 	sed -i '1s/$/\n\n\n/' $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 
 	#FORECAST
-	echo "\${color1}FORECAST\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "\${color1}FORECAST\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=7; i<=360; i+=30 ))
 		do
@@ -811,7 +811,7 @@ sleep 0.2
 
 	#TEMPERATURE
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "TEMPER.\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "TEMPER.\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=4; i<=360; i+=30 ))
 		do
@@ -830,7 +830,7 @@ sleep 0.2
 
 	#REAL FEEL
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "REAL FEEL\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "REAL FEEL\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=6; i<=360; i+=30 ))
 		do
@@ -849,7 +849,7 @@ sleep 0.2
 
 	#CHANCE OF PRECIPITATION
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "PRECIP. %\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "PRECIP. %\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=9; i<=360; i+=30 ))
 		do
@@ -868,7 +868,7 @@ sleep 0.2
 
 	#MAX UV INDEX
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "UV INDEX\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "UV INDEX\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=12; i<=360; i+=30 ))
 		do
@@ -887,7 +887,7 @@ sleep 0.2
 
 	#WIND
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "WIND\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "WIND\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=14; i<=360; i+=30 ))
 		do
@@ -906,7 +906,7 @@ sleep 0.2
 
 	#WIND GUSTS
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "WIND GUSTS\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "WIND GUSTS\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=16; i<=360; i+=30 ))
 		do
@@ -925,7 +925,7 @@ sleep 0.2
 
 	#HUMIDITY
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "HUMIDITY\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "HUMIDITY\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=18; i<=360; i+=30 ))
 		do
@@ -944,7 +944,7 @@ sleep 0.2
 
 	#INDOOR HUMIDITY
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "IND. HUMID.\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "IND. HUMID.\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=20; i<=360; i+=30 ))
 		do
@@ -963,7 +963,7 @@ sleep 0.2
 
 	#DEW POINT
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "DEW POINT\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "DEW POINT\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=22; i<=360; i+=30 ))
 		do
@@ -982,7 +982,7 @@ sleep 0.2
 
 	#CLOUD COVER
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "CLOUD CVR\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "CLOUD CVR\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=24; i<=360; i+=30 ))
 		do
@@ -1001,7 +1001,7 @@ sleep 0.2
 
 	#PRECIPITATION AMOUNT
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "PREC. AM.\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "PREC. AM.\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=26; i<=360; i+=30 ))
 		do
@@ -1020,7 +1020,7 @@ sleep 0.2
 
 	#VISIBILITY
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "VISIBILITY\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "VISIBILITY\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=28; i<=360; i+=30 ))
 		do
@@ -1039,7 +1039,7 @@ sleep 0.2
 
 	#CLOUD CEILING
 	echo "\${color1}\${goto 100}\${hr 1}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
-	echo "CLOUD CEIL.\${color}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+	echo "CLOUD CEIL.\${color0}" >> $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 	jump_to=100
 	for (( i=30; i<=360; i+=30 ))
 		do
@@ -1084,7 +1084,7 @@ sleep 0.2
 
 	#CONKYFONT
 	if [[ $hourly0 == 1 ]]; then
-		sed -i '4s/$/\${color}\${font conkyweather:size=35}/' $CONKY_DIR/Accuweather_conky_script/temp/altogether24
+		sed -i '4s/$/\${color0}\${font conkyweather:size=35}/' $CONKY_DIR/Accuweather_conky_script/temp/altogether24
 		jump_to=95
 		for (( i=721; i<=732; i+=1 ))
 			do
