@@ -110,9 +110,9 @@ ${voffset 1}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem n
 ${voffset 1}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem name 5}${goto 120}${top_mem mem_res 5}${alignr}${top_mem mem 5}%
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}NETWORK ${voffset 2}${color1}${hr 2}
-${color}${if_up wlp3s0}
-${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal${wireless_link_qual_perc wlp3s0}% ${alignr}${wireless_essid wlp3s0}
-${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp3s0}${alignr}Total:${totaldown wlp3s0}
-${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp3s0}${alignr}Total:${totalup wlp3s0}
+${color}${if_up wlp4s0}
+${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal${wireless_link_qual_perc wlp4s0}% ${alignr}${wireless_essid wlp4s0}
+${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp4s0}${alignr}Total:${totaldown wlp4s0}
+${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp4s0}${alignr}Total:${totalup wlp4s0}
 ${endif}
 ]];
