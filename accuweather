@@ -523,8 +523,8 @@ sleep 0.2
 
 		sed -i -e 's/\.svg.*$//g' -e 's/&#xB0;<\/span>//g' -e 's/<\/span>//g' $HOME/Accuweather_conky_script/temp/daily_forecast
 # сохранить состояние погоды в файле daily_phrase 
-		sed '/class="phrase/!d' $HOME/Accuweather_conky_script/temp/daily_forecast > $HOME/Accuweather_conky_script/daily_phrase
-		sed -i -e 's/<\/div>//g' -e 's/.*>//g' $HOME/Accuweather_conky_script/daily_phrase
+		sed '/class="phrase/!d' $HOME/Accuweather_conky_script/temp/daily_forecast > $HOME/Accuweather_conky_script/temp/daily_phrase
+		sed -i -e 's/<\/div>//g' -e 's/.*>//g' $HOME/Accuweather_conky_script/temp/daily_phrase
 
 		sed -i -e 's/^.*">\///' -e 's/^.*">//' -e 's/.*weathericons\///g' -e 's/^[\t]*//g' -e '/^$/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
@@ -535,7 +535,7 @@ sleep 0.2
 	   for (( i=1; i<=20; i+=1 ))
 	 	do
 
-	phrase=$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_phrase)
+	phrase=$(sed -n ${i}p $HOME/Accuweather_conky_script/temp/daily_phrase)
 
 	sed -i "${j}s/^/$phrase\n/" $HOME/Accuweather_conky_script/temp/daily_forecast
 
