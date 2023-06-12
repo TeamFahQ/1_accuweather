@@ -507,26 +507,44 @@ sleep 0.2
 ############
 
 
-	#Daily forecast
+#Daily forecast
 	if [[ -s $HOME/Accuweather_conky_script/temp/daily_forecast_raw ]]; then
 
 		sed '/<div class="daily-wrapper" data-qa="dailyCard0">/,/Further Ahead/!d' $HOME/Accuweather_conky_script/temp/daily_forecast_raw > $HOME/Accuweather_conky_script/temp/daily_forecast
-
+# удаляем блок  WinterCast
 		sed -i '/<div class="daily-wintercast-cta">/,/div class="daily-wrapper"/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
+# удалить строки между  collapseConnatix   и   connatix" class (delete alert)
+	sed -i '/collapseConnatix/,/connatix" class/d' $HOME/Accuweather_conky_script/temp/daily_forecast
+	sed -i '/script>/d' $HOME/Accuweather_conky_script/temp/daily_forecast
+
+# удалить строки между  alert-banners   и  alert-description  (delete alert)
+	sed -i '/alert-banners/,/alert-description/d' $HOME/Accuweather_conky_script/temp/daily_forecast
+
 		sed -i -e 's/\.svg.*$//g' -e 's/&#xB0;<\/span>//g' -e 's/<\/span>//g' $HOME/Accuweather_conky_script/temp/daily_forecast
+# сохранить состояние погоды в файле daily_phrase 
+		sed '/class="phrase/!d' $HOME/Accuweather_conky_script/temp/daily_forecast > $HOME/Accuweather_conky_script/daily_phrase
+		sed -i -e 's/<\/div>//g' -e 's/.*>//g' $HOME/Accuweather_conky_script/daily_phrase
 
 		sed -i -e 's/^.*">\///' -e 's/^.*">//' -e 's/.*weathericons\///g' -e 's/^[\t]*//g' -e '/^$/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
 		sed -i -e '/<\|>\|fill=\|^[ ]*$\|Further Ahead/d' $HOME/Accuweather_conky_script/temp/daily_forecast
 
-		sed -i '/WinterCast/,+1d' $HOME/Accuweather_conky_script/temp/daily_forecast
+#### вставка строк из файла phrase  в файл daily_phrase ####
+			j=6
+	   for (( i=1; i<=20; i+=1 ))
+	 	do
 
-        sed -i '/connatixEl/,+2d' $HOME/Accuweather_conky_script/temp/daily_forecast
+	phrase=$(sed -n ${i}p $HOME/Accuweather_conky_script/daily_phrase)
 
-        sed -i '/}/,+1d' $HOME/Accuweather_conky_script/temp/daily_forecast
+	sed -i "${j}s/^/$phrase\n/" $HOME/Accuweather_conky_script/temp/daily_forecast
+
+			((j+=7))
+
+		  done
 
 		sed -i '85,$d' $HOME/Accuweather_conky_script/temp/daily_forecast
+
 #
 # Change a short name to a long one or translate into another language
 #		sed -i -e 's/^Sun$/Sunday/g' -e 's/^Mon$/Monday/g' -e 's/^Tue$/Tuesday/g' -e 's/^Wed$/Wednesday/g' -e 's/^Thu$/Thursday/g' -e 's/^Fri$/Friday/g' -e 's/^Sat$/Saturday/g' $HOME/Accuweather_conky_script/temp/daily_forecast
