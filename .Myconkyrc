@@ -78,7 +78,7 @@ ${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce RTX ${alignr}4070 Gaming X
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI ${exec cat /sys/devices/virtual/dmi/id/board_name|cut -c1-21}
 
-${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7700X ${freq_g 0} GHz ${color}${voffset 5}${color1}${hr 2}${color}
+${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7900X ${freq_g 0} GHz ${color}${voffset 5}${color1}${hr 2}${color}
 ${voffset -5}${font StyleBats:size=9.9}k${voffset 1}${font}  1 ${offset 5}${cpugraph cpu1 8,50 scale -t}${offset 8}  2 ${alignc}${cpugraph cpu2 8,50 scale -t}${offset 5}${alignr}3 ${alignr}${cpugraph cpu3 8,50 scale -t}
 ${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  4${offset 5}${cpugraph cpu4 8,50 scale -t}${offset 8} 5 ${alignc}${cpugraph cpu5 8,50 scale -t}${offset 5}${alignr}6 ${alignr}${cpugraph cpu6 8,50 scale -t}
 ${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  7${offset 5}${cpugraph cpu7 8,50 scale -t}${offset 8} 8 ${alignc}${cpugraph cpu8 8,50 scale -t}${offset 5}${alignr}9 ${alignr}${cpugraph cpu9 8,50 scale -t}
@@ -89,10 +89,10 @@ ${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 19${offset 5}${cpugra
 ${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}22${offset 5}${cpugraph cpu22 8,50 scale -t}${offset 5}23  ${alignc}${cpugraph cpu23 8,50 scale -t}${offset 5}24 ${alignr}${cpugraph cpu24 8,50 scale -t}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}TEMPS & FANS ${voffset 4}${color1}${hr 2}
-${color}${font}${voffset -2}CPU:  ${execpi 2 (sensors -f| grep -A 0 'CPU:'|cut -c16-19)} / ${execpi 2 (sensors | grep -A 0 'CPU:'|cut -c16-19)}${alignc}${alignr}Fan:${execpi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c15-19)}
-Fan1:${execpi 2 (sensors -f|grep -m 1 'System Fan #1'|cut -c15-19)}${alignc}${alignr}Fan2:${execpi 2 (sensors -f|grep -m 1 'System Fan #2'|cut -c15-19)}
-Fan3:${execpi 2 (sensors -f|grep -m 1 'System Fan #3'|cut -c15-19)}${alignc}${alignr}Fan4:${execpi 2 (sensors -f|grep -m 1 'System Fan #4'|cut -c15-19)}
-GPU: +${execi 2 bash $HOME/Conky/NVIDIA/gpu} °F / ${execi 2 bash $HOME/Conky/NVIDIA/gpu-c} °C${alignr}Fan: ${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
+${color}${font}${voffset -2}CPU:${execpi 2 (sensors -f| grep -A 0 'CPU:'|cut -c15-17)}/${execpi 2 (sensors | grep -A 0 'CPU:'|cut -c16-17)}${alignc}${alignr}CPU/Pump:${execpi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c13-17)}/${execpi 2  (sensors -f| grep -A 0 'Pump'|cut -c13-17)}
+Rear:${execpi 2 (sensors -f|grep -m 1 'Rear'|cut -c13-17)}${alignc}${alignr}F-Top:${execpi 2 (sensors -f|grep -m 1 'F-Top'|cut -c13-17)}
+F-Mid:${execpi 2 (sensors -f|grep -m 1 'F-Mid'|cut -c13-17)}${alignc}${alignr}F-Low:${execpi 2 (sensors -f|grep -m 1 'F-Low:'|cut -c13-17)}
+GPU: +${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu} °F / ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan: ${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
 " -f2 | cut -d : -f4 | cut -d . -f1)}/${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
 " -f6 | cut -d : -f4 | cut -d . -f1)}
 

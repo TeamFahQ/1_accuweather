@@ -1,0 +1,4 @@
+#!/bin/bash
+temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
+cell=$(($temp))
+echo $cell
