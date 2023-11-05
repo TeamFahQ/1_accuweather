@@ -78,7 +78,7 @@ ${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce RTX ${alignr}4070 Gaming X
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI ${exec cat /sys/devices/virtual/dmi/id/board_name|cut -c1-21}
 
-${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7900X ${freq_g 0} GHz ${color}${voffset 5}${color1}${hr 2}${color}
+${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7900X ${freq_g 0}G/${execpi 2 (sensors -f| grep -A 0 'CPU Soc:'|cut -c16-21)}${voffset 5}${color1}${hr 2}${color}
 ${voffset -5}${font StyleBats:size=9.9}k${voffset 1}${font}  1 ${offset 5}${cpugraph cpu1 8,50 scale -t}${offset 8}  2 ${alignc}${cpugraph cpu2 8,50 scale -t}${offset 5}${alignr}3 ${alignr}${cpugraph cpu3 8,50 scale -t}
 ${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  4${offset 5}${cpugraph cpu4 8,50 scale -t}${offset 8} 5 ${alignc}${cpugraph cpu5 8,50 scale -t}${offset 5}${alignr}6 ${alignr}${cpugraph cpu6 8,50 scale -t}
 ${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  7${offset 5}${cpugraph cpu7 8,50 scale -t}${offset 8} 8 ${alignc}${cpugraph cpu8 8,50 scale -t}${offset 5}${alignr}9 ${alignr}${cpugraph cpu9 8,50 scale -t}
