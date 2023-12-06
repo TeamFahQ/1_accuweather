@@ -1,3 +1,14 @@
+eba8b8b Thomas Raines 2023-11-13 .Myconkyrc: a bit more cleanup
+d628768 Thomas Raines 2023-11-10 Add cpu voltages to CPU stats and some clean up
+d2914b5 Thomas Raines 2023-11-05 Added cpu soc voltage monitoring
+23e5678 Thomas Raines 2023-08-30 Consolidating my conky scripts
+4ac9664 Thomas Raines 2023-06-22 .Myconkyrc:Update for new build
+1bae8a2 Thomas Raines 2023-06-12 Move daily_phrase to temp
+e14237a Thomas Raines 2023-06-12 accuweather: Updatede script per posted changes from Marens
+7ff31b0 Thomas Raines 2023-06-02 change network interface to read new wifi card
+6d90cc7 Thomas Raines 2022-12-21 Add dates to .Myconkyrc
+8f73ad5 Thomas Raines 2022-10-30 accuweather:ignore random lines of code for daily_forecast from daily_forecast_raw. Probably looks a little crude, but it works.
+4637ee4 Thomas Raines 2022-08-19 Update changelog
 5450232 Thomas Raines 2022-08-19 Merge branch 'rebase' of https://github.com/TeamFahQ/1_accuweather
 3c81833 Thomas Raines 2022-08-18 updating with Huran changes 8-17-2022
 6c358d3 Thomas Raines 2022-05-17 Generate new CHANGELOG with new format. Remove test file
