@@ -29,7 +29,7 @@ conky.config = {
     stippled_borders = 0,
     background = false,
     use_spacer = 'left',
-    text_buffer_size = 256,
+    text_buffer_size = 1024,
 	no_buffers = false,
     short_units = true,
     pad_percents = 2,
@@ -49,8 +49,8 @@ conky.text = [[
 CPU${cpugauge cpu0 30,60} ${alignr}RAM${memgauge 30,60}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}MainFrame ${voffset 4}${color1}${hr 2}${color}
-${font Zekton:size=24}${time %l}:${time %M}${font Zekton:size=20} ${time %p} ${time %a}
-${font Zekton:size=24}${time %b} ${font Zekton:size=22}${time %e} ${time %Y}
+${font Zekton:size=24}${alignc}${time %l}:${time %M}${font Zekton:size=20} ${time %p} ${time %a}
+${font Zekton:size=24}${alignc}${time %b} ${font Zekton:size=22}${time %e} ${time %Y}
 
 ${voffset -40}${color2}${font Zekton:size=10:bold}${offset -1}WEATHER ${voffset 4}${color1}${hr 2}
 ${color}
@@ -74,7 +74,7 @@ ${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/foreca
 ${goto 55}${execi 600 sed -n '34p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
 ${voffset -5}${color2}${font Zekton:size=10:bold}${offset -1}SYSTEM ${voffset 4}${color1}${hr 2}
-${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${offset 3}${sysname}${offset 3}${kernel}${alignr}${machine}
+${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${offset 3}${sysname}${offset 3}${kernel}  ${machine}
 #${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}Threadripper 1920X${alignr}4.2 GHz
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce RTX ${alignr}4070 Gaming X
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI ${exec cat /sys/devices/virtual/dmi/id/board_name|cut -c1-21}
