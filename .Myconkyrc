@@ -1,7 +1,7 @@
 conky.config = {
 	own_window = true,
 	own_window_class = 'Conky',
-	own_window_transparent = false,
+	own_window_transparent = true,
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	own_window_argb_visual = true,
 	own_window_argb_value = 60,
@@ -81,20 +81,20 @@ ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI ${exec 
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7900X ${freq_g 0}Ghz ${voffset 4}${color1}${hr 2}
 ${voffset -5}${color}${font}Vcore: ${execpi 2 (sensors -f| grep -A 0 'CPU Vcore:'|cut -c14-23)} ${alignr}Soc: ${execpi 2 (sensors -f| grep -A 0 'CPU Soc:'|cut -c16-21)}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  1 ${offset 5}${cpugraph cpu1 8,50 scale -t}${offset 8}  2 ${alignc}${cpugraph cpu2 8,50 scale -t}${offset 5}${alignr}3 ${alignr}${cpugraph cpu3 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  4${offset 5}${cpugraph cpu4 8,50 scale -t}${offset 8} 5 ${alignc}${cpugraph cpu5 8,50 scale -t}${offset 5}${alignr}6 ${alignr}${cpugraph cpu6 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  7${offset 5}${cpugraph cpu7 8,50 scale -t}${offset 8} 8 ${alignc}${cpugraph cpu8 8,50 scale -t}${offset 5}${alignr}9 ${alignr}${cpugraph cpu9 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 10${offset 5}${cpugraph cpu10 8,50 scale -t}${offset 8} 11 ${alignc}${cpugraph cpu11 8,50 scale -t}${offset 5}${alignr} 12 ${alignr}${cpugraph cpu12 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 13${offset 5}${cpugraph cpu13 8,50 scale -t}${offset 8} 14 ${alignc}${cpugraph cpu14 8,50 scale -t}${offset 5}${alignr} 15 ${alignr}${cpugraph cpu15 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 16${offset 5}${cpugraph cpu16 8,50 scale -t}${offset 5} 17  ${alignc}${cpugraph cpu17 8,50 scale -t}${offset 5}${alignr} 18 ${cpugraph cpu18 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 19${offset 5}${cpugraph cpu19 8,50 scale -t}${offset 5}20 ${alignc}${cpugraph cpu20 8,50 scale -t}${offset 5}${alignr} 21  ${cpugraph cpu21 8,50 scale -t}
-${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}22${offset 5}${cpugraph cpu22 8,50 scale -t}${offset 5}23  ${alignc}${cpugraph cpu23 8,50 scale -t}${offset 5}24 ${alignr}${cpugraph cpu24 8,50 scale -t}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  1 ${offset 5}${cpugraph cpu1 8,50}${offset 8}  2 ${alignc}${cpugraph cpu2 8,50}${offset 5}${alignr}3 ${alignr}${cpugraph cpu3 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  4${offset 5}${cpugraph cpu4 8,50}${offset 8} 5 ${alignc}${cpugraph cpu5 8,50}${offset 5}${alignr}6 ${alignr}${cpugraph cpu6 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  7${offset 5}${cpugraph cpu7 8,50}${offset 8} 8 ${alignc}${cpugraph cpu8 8,50}${offset 5}${alignr}9 ${alignr}${cpugraph cpu9 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 10${offset 5}${cpugraph cpu10 8,50}${offset 8} 11 ${alignc}${cpugraph cpu11 8,50}${offset 5}${alignr} 12 ${alignr}${cpugraph cpu12 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 13${offset 5}${cpugraph cpu13 8,50}${offset 8} 14 ${alignc}${cpugraph cpu14 8,50}${offset 5}${alignr} 15 ${alignr}${cpugraph cpu15 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 16${offset 5}${cpugraph cpu16 8,50}${offset 5} 17  ${alignc}${cpugraph cpu17 8,50}${offset 5}${alignr} 18 ${cpugraph cpu18 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 19${offset 5}${cpugraph cpu19 8,50}${offset 5}20 ${alignc}${cpugraph cpu20 8,50}${offset 5}${alignr} 21  ${cpugraph cpu21 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}22${offset 5}${cpugraph cpu22 8,50}${offset 5}23  ${alignc}${cpugraph cpu23 8,50}${offset 5}24 ${alignr}${cpugraph cpu24 8,50}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}TEMPS & FANS ${voffset 4}${color1}${hr 2}
-${color}${font}${voffset -2}CPU:${execpi 2 (sensors -f| grep -A 0 'CPU:'|cut -c15-17)}/${execpi 2 (sensors | grep -A 0 'CPU:'|cut -c16-17)}${alignc}${alignr}CPU/Pump:${execpi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c13-17)}/${execpi 2  (sensors -f| grep -A 0 'Pump'|cut -c13-17)}
+${color}${font}${voffset -2}CPU: ${execpi 2 (sensors | grep -A 0 'CPU:'|cut -c16-21)}${alignc}${alignr}CPU/Pump:${execpi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c13-17)}/${execpi 2  (sensors -f| grep -A 0 'Pump'|cut -c13-17)}
 Rear:${execpi 2 (sensors -f|grep -m 1 'Rear'|cut -c13-17)}${alignc}${alignr}F-Top:${execpi 2 (sensors -f|grep -m 1 'F-Top'|cut -c13-17)}
 F-Mid:${execpi 2 (sensors -f|grep -m 1 'F-Mid'|cut -c13-17)}${alignc}${alignr}F-Low:${execpi 2 (sensors -f|grep -m 1 'F-Low:'|cut -c13-17)}
-GPU: +${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu} °F / ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan: ${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
+GPU: ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan: ${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
 " -f2 | cut -d : -f4 | cut -d . -f1)}/${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
 " -f6 | cut -d : -f4 | cut -d . -f1)}
 
