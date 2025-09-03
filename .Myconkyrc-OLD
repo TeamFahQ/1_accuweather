@@ -1,0 +1,120 @@
+conky.config = {
+	own_window = true,
+	own_window_class = 'Conky',
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_argb_visual = true,
+	own_window_argb_value = 60,
+	minimum_width = 850, minimum_height = 1100,
+	maximum_width = 225,
+	double_buffer = true,
+	gap_x = 0,
+	gap_y = 0,
+	alignment = 'top_right',
+	use_xft = true,
+    override_utf8_locale = true,
+	max_text_width = 0,
+	draw_shades = false,
+	draw_outline = false,
+	default_shade_color = '1f1f1f',
+	default_outline_color = '1f1f1f',
+	uppercase = false,
+	draw_graph_borders = true,
+	default_color = 'darkred',
+	color1 = 'slategrey',-- Horizonal lines
+	color2 = 'cdcdcd',-- Text
+	color3 = 'bb1e40',-- Text
+	color6 = 'darkblue',-- Text
+	draw_borders = false,
+    stippled_borders = 0,
+    background = false,
+    use_spacer = 'left',
+    text_buffer_size = 1024,
+	no_buffers = false,
+    short_units = true,
+    pad_percents = 2,
+    temperature_unit = 'fahrenheit',
+    update_interval = 1,
+    if_up_strictness = 'address',
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	background = false,
+	font = 'Zekton:size=10',
+	xftalpha = 0.9,
+	update_interval = .5,
+	total_run_times = 0,
+};
+
+conky.text = [[
+CPU${cpugauge cpu0 30,60} ${alignr}RAM${memgauge 30,60}
+
+${voffset -15}${color2}${font Zekton:size=10:bold}MainFrame ${voffset 4}${color1}${hr 2}${color}
+${font Zekton:size=24}${alignc}${time %l}:${time %M}${font Zekton:size=20} ${time %p} ${time %a}
+${font Zekton:size=24}${alignc}${time %b} ${font Zekton:size=22}${time %e} ${time %Y}
+
+${voffset -40}${color2}${font Zekton:size=10:bold}${offset -1}WEATHER ${voffset 4}${color1}${hr 2}
+${color}
+${execi 600 bash $HOME/Accuweather_conky_script/accuweather -f2016}
+${image $HOME/Accuweather_conky_script/temp/images/forecast_0.png -p  0,165 -s 40x36}${font Zekton:size=12}${goto 55}${voffset -40}CURRENTLY: ${execi 600 sed -n '2p' $HOME/Accuweather_conky_script/temp/curr_cond}°
+${goto 55}${execi 600 sed -n '4p' $HOME/Accuweather_conky_script/temp/curr_cond|fold -w30}${color1}
+
+${voffset 10}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_1.png -p  0,210 -s 40x36}${font}${goto 55}${voffset -20}Today ${execi 600 sed -n '2p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '4p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '5p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+${goto 55}${execi 600 sed -n '6p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_2.png -p  0,260 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '8p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '9p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '11p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '12p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${goto 55}${execi 600 sed -n '13p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_3.png -p  0,305 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '15p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '16p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '18p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '19p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${goto 55}${execi 600 sed -n '20p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+
+${voffset 22}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_4.png -p  0,350 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '22p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '23p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '25p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '26p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${goto 55}${execi 600 sed -n '27p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_5.png -p  0,395 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '29p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '30p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '32p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '33p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${goto 55}${execi 600 sed -n '34p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+
+${voffset -5}${color2}${font Zekton:size=10:bold}${offset -1}SYSTEM ${voffset 4}${color1}${hr 2}
+${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${offset 3}${sysname}${offset 3}${kernel}  ${machine}
+#${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}Threadripper 1920X${alignr}4.2 GHz
+${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce RTX ${alignr}4070 Gaming X
+${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI ${exec cat /sys/devices/virtual/dmi/id/board_name|cut -c1-21}
+
+${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7900X ${freq_g 0}Ghz ${voffset 4}${color1}${hr 2}
+${voffset -5}${color}${font}Vcore: ${execpi 2 (sensors -f| grep -A 0 'CPU Vcore:'|cut -c14-23)} ${alignr}Soc: ${execpi 2 (sensors -f| grep -A 0 'CPU Soc:'|cut -c16-21)}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  1 ${offset 5}${cpugraph cpu1 8,50}${offset 8}  2 ${alignc}${cpugraph cpu2 8,50}${offset 5}${alignr}3 ${alignr}${cpugraph cpu3 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  4${offset 5}${cpugraph cpu4 8,50}${offset 8} 5 ${alignc}${cpugraph cpu5 8,50}${offset 5}${alignr}6 ${alignr}${cpugraph cpu6 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}  7${offset 5}${cpugraph cpu7 8,50}${offset 8} 8 ${alignc}${cpugraph cpu8 8,50}${offset 5}${alignr}9 ${alignr}${cpugraph cpu9 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 10${offset 5}${cpugraph cpu10 8,50}${offset 8} 11 ${alignc}${cpugraph cpu11 8,50}${offset 5}${alignr} 12 ${alignr}${cpugraph cpu12 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 13${offset 5}${cpugraph cpu13 8,50}${offset 8} 14 ${alignc}${cpugraph cpu14 8,50}${offset 5}${alignr} 15 ${alignr}${cpugraph cpu15 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 16${offset 5}${cpugraph cpu16 8,50}${offset 5} 17  ${alignc}${cpugraph cpu17 8,50}${offset 5}${alignr} 18 ${cpugraph cpu18 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font} 19${offset 5}${cpugraph cpu19 8,50}${offset 5}20 ${alignc}${cpugraph cpu20 8,50}${offset 5}${alignr} 21  ${cpugraph cpu21 8,50}
+${voffset 2}${font StyleBats:size=9.9}k${voffset 1}${font}22${offset 5}${cpugraph cpu22 8,50}${offset 5}23  ${alignc}${cpugraph cpu23 8,50}${offset 5}24 ${alignr}${cpugraph cpu24 8,50}
+
+${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}TEMPS & FANS ${voffset 4}${color1}${hr 2}
+${color}${font}${voffset -2}CPU: ${execpi 2 (sensors | grep -A 0 'CPU:'|cut -c16-21)}C${alignc}${alignr}CPU/Pump:${execpi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c13-17)}/${execpi 2  (sensors -f| grep -A 0 'Pump'|cut -c13-17)}
+Rear:${execpi 2 (sensors -f|grep -m 1 'Rear'|cut -c13-17)}${alignc}${alignr}F-Top:${execpi 2 (sensors -f|grep -m 1 'F-Top'|cut -c13-17)}
+F-Mid:${execpi 2 (sensors -f|grep -m 1 'F-Mid'|cut -c13-17)}${alignc}${alignr}F-Low:${execpi 2 (sensors -f|grep -m 1 'F-Low:'|cut -c13-17)}
+GPU: ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan: ${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
+" -f2 | cut -d : -f4 | cut -d . -f1)}/${execpi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
+" -f6 | cut -d : -f4 | cut -d . -f1)}
+
+${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}STORAGE ${voffset 4}${color1}${hr 2}
+${color}${voffset -2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}Linux${goto 80}${fs_used /} | ${fs_size /}${alignr}${fs_free_perc /}%
+${voffset 2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}Home${goto 80}${fs_used /home/thomas} | ${fs_size /home/thomas}${alignr}${fs_free_perc /home/thomas}%
+${voffset 2}${font StyleBats:size=9.9}${offset -1}x${voffset -2}${font}${offset 4}LinuxBU${goto 80}${fs_used /media/thomas/LinuxBU} | ${fs_size /media/thomas/LinuxBU}${alignr}${fs_free_perc /media/thomas/LinuxBU}%
+
+${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}PROCESSES ${voffset 4}${color1}${hr 2}
+${voffset -2}${color2}${font StyleBats:size=10}z ${offset -2}${voffset -3}${font Zekton:size=8:bold}Running ${running_processes}${offset 40}  Usage Total ${processes}${color}
+${voffset 4}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem name 1}${goto 120}${top_mem mem_res 1}${alignr}${top_mem mem 1}%
+${voffset 1}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem name 2}${goto 120}${top_mem mem_res 2}${alignr}${top_mem mem 2}%
+${voffset 1}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem name 3}${goto 120}${top_mem mem_res 3}${alignr}${top_mem mem 3}%
+${voffset 1}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem name 4}${goto 120}${top_mem mem_res 4}${alignr}${top_mem mem 4}%
+${voffset 1}${font StyleBats:size=10}h${voffset -1}${font}${offset 5}${top_mem name 5}${goto 120}${top_mem mem_res 5}${alignr}${top_mem mem 5}%
+
+${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}NETWORK ${voffset 4}${color1}${hr 2}
+${color}${if_up wlp13s0}
+${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal${wireless_link_qual_perc wlp13s0}% ${alignr}${wireless_essid wlp13s0}
+${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp13s0}${alignr}Total:${totaldown wlp13s0}
+${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp13s0}${alignr}Total:${totalup wlp13s0}
+${endif}
+]];
