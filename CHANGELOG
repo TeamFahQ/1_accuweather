@@ -1,3 +1,11 @@
+3cee34c Thomas Raines 2025-11-11 .Myconkyrc:Add lua script to reload conky. This is a WIP. When I start my PC and conky loads, it does not display the updated weather info. I'm trying to find the best way to load updated weather info, and refresh said info on the fly. I was going for a mouse click, but it turned out to work with the mouse hovering.
+8ab38cf Thomas Raines 2025-11-11 .Myconkyrc:Using script to call wifi frequency
+3b6c34b Thomas Raines 2025-09-03 Updating .Myconkyrc and .Myconkyrc-OLD
+298882a Thomas Raines 2024-12-01 conkyrc:more personal adjustmens
+f30fcb2 Thomas Raines 2024-11-25 Adjusting and Updating .conkyrc
+cf48a85 Thomas Raines 2024-02-06 .Myconkyrc: More inprovements
+f270e23 Thomas Raines 2023-12-27 .Myconkyrc:Update colors
+f40c323 Thomas Raines 2023-12-06 Updated changelog...it's been a while
 eba8b8b Thomas Raines 2023-11-13 .Myconkyrc: a bit more cleanup
 d628768 Thomas Raines 2023-11-10 Add cpu voltages to CPU stats and some clean up
 d2914b5 Thomas Raines 2023-11-05 Added cpu soc voltage monitoring
