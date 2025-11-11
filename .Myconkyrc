@@ -111,5 +111,5 @@ ${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal${wireles
 ${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp13s0}${alignr}Total:${totaldown wlp13s0}
 ${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp13s0}${alignr}Total:${totalup wlp13s0}
 ${endif}
-${voffset -15}${font Poky:size=12}Y${font}${goto 32}${voffset -1}${execi 50 iwlist scan|grep Frequency|cut -c20-30}${alignr}${execi 50 iwlist scan|grep Frequency|cut -c31-39}
+${voffset -15}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Frequency${alignr}${execi 0.5 ~/Accuweather_conky_script/wifi-scan|cut -c7-39}
 ]];
