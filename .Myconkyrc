@@ -43,11 +43,14 @@ conky.config = {
 	xftalpha = 0.9,
 	update_interval = .5,
 	total_run_times = 0,
+    lua_load = '~/Accuweather_conky_script/conky_functions.lua',
+    lua_draw_hook_post = 'conky_draw_reset_button',
+    lua_mouse_hook = 'conky_reload'
 };
 
 conky.text = [[
 
-${voffset -15}${color2}${font Zekton:size=10:bold}MainFrame ${voffset 4}${color1}${hr 2}${color}
+${voffset -15}                               ${voffset 4}${color1}${hr 2}${color}
 ${font Zekton:size=24}${alignc}${time %l}:${time %M}${font Zekton:size=20} ${time %p} ${time %a}
 ${font Zekton:size=24}${alignc}${time %b} ${font Zekton:size=22}${time %e} ${time %Y}
 
