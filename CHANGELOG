@@ -1,3 +1,7 @@
+ba601c9 Thomas Raines 2025-11-12 Changelog Update
+4d9027c Thomas Raines 2025-11-12 conky_functions: Use pkill to reload conky
+ea9565a Thomas Raines 2025-11-12 Myconkyrc: Change interval to run frequency script
+d361438 Thomas Raines 2025-11-11 Changelog udpate
 3cee34c Thomas Raines 2025-11-11 .Myconkyrc:Add lua script to reload conky. This is a WIP. When I start my PC and conky loads, it does not display the updated weather info. I'm trying to find the best way to load updated weather info, and refresh said info on the fly. I was going for a mouse click, but it turned out to work with the mouse hovering.
 8ab38cf Thomas Raines 2025-11-11 .Myconkyrc:Using script to call wifi frequency
 3b6c34b Thomas Raines 2025-09-03 Updating .Myconkyrc and .Myconkyrc-OLD
