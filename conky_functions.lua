@@ -6,7 +6,7 @@ function conky_reload(event)
 
     if event.x >= button_x and event.x <= button_x + button_w and
        event.y >= button_y and event.y <= button_y + button_h then
-            os.execute("killall -SIGUSR1 conky")
+            os.execute("pkill conky && conky &")
             -- os.execute("killall conky && sleep 1 && conky &")
     end
 end
