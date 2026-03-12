@@ -1295,3 +1295,5 @@ sleep 0.5
 
 #Resume weather conky
 pkill -CONT -xf "$weather_conky_launch_command"
+#reload conkyrd
+# killall -SIGUSR1 conky

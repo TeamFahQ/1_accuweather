@@ -1,18 +1,20 @@
 conky.config = {
 	own_window = true,
+	own_window_type = desktop,
 	own_window_class = 'Conky',
 	own_window_transparent = true,
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	own_window_argb_visual = true,
 	own_window_argb_value = 60,
-	minimum_width = 850, minimum_height = 1100,
+	minimum_width = 850,
+	minimum_height = 1,
 	maximum_width = 225,
 	double_buffer = true,
 	gap_x = 0,
-	gap_y = 0,
-	alignment = 'top_right',
+	gap_y = -200,
+	alignment = 'bottom_right',
 	use_xft = true,
-    override_utf8_locale = true,
+	override_utf8_locale = true,
 	max_text_width = 0,
 	draw_shades = false,
 	draw_outline = false,
@@ -43,45 +45,45 @@ conky.config = {
 	xftalpha = 0.9,
 	update_interval = .5,
 	total_run_times = 0,
-    lua_load = '~/Accuweather_conky_script/conky_functions.lua',
-    lua_draw_hook_post = 'conky_draw_reset_button',
-    lua_mouse_hook = 'conky_reload'
+    -- lua_load = '~/Accuweather_conky_script/conky_functions.lua',
+    -- lua_draw_hook_pre = 'conky_draw_reset_button',
+    -- lua_mouse_hook = 'conky_reload',
 };
 
 conky.text = [[
 
-${voffset -15}                               ${voffset 4}${color1}${hr 2}${color}
+${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}MainFrame ${voffset 4}${color1}${hr 2}${color}
 ${font Zekton:size=24}${alignc}${time %l}:${time %M}${font Zekton:size=20} ${time %p} ${time %a}
 ${font Zekton:size=24}${alignc}${time %b} ${font Zekton:size=22}${time %e} ${time %Y}
 
-${voffset -40}${color2}${font Zekton:size=10:bold}${offset -1}WEATHER ${voffset 4}${color1}${hr 2}
+${voffset -40}${color2}${font Zekton:size=10:bold}${offset -1}Weather ${voffset 4}${color1}${hr 2}
 ${color}
-${execi 600 bash $HOME/Accuweather_conky_script/accuweather -f2016}
+${execi 10 bash $HOME/Accuweather_conky_script/accuweather -f2016}
 ${image $HOME/Accuweather_conky_script/temp/images/forecast_0.png -p  0,125 -s 40x36}${font Zekton:size=12}${goto 55}${voffset -40}CURRENTLY: ${execi 600 sed -n '2p' $HOME/Accuweather_conky_script/temp/curr_cond}°
 ${goto 55}${execi 600 sed -n '4p' $HOME/Accuweather_conky_script/temp/curr_cond|fold -w30}${color1}
 
-${voffset 10}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_1.png -p  0,170 -s 40x36}${font}${goto 55}${voffset -20}Today ${execi 600 sed -n '2p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '4p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '5p' $HOME/Accuweather_conky_script/temp/daily_forecast}
+${voffset 10}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_1.png -p  0,170 -s 40x36}${font}${goto 55}${voffset -20}Today ${execi 600 sed -n '2p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '5p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '4p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 ${goto 55}${execi 600 sed -n '6p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_2.png -p  0,220 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '8p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '9p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '11p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '12p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_2.png -p  0,220 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '8p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '9p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '12p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '11p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '13p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_3.png -p  0,270 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '15p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '16p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '18p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '19p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_3.png -p  0,270 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '15p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '16p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '19p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '18p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '20p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 22}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_4.png -p  0,320 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '22p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '23p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '25p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '26p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 22}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_4.png -p  0,320 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '22p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '23p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '26p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '25p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '27p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_5.png -p  0,375 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '29p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '30p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '32p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '33p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_5.png -p  0,375 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '29p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '30p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '33p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '32p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '34p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_6.png -p  0,425 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '36p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '37p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '39p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '40p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_6.png -p  0,425 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '36p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '37p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '40p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '39p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '41p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_7.png -p  0,475 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '43p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '44p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '46p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '47p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_7.png -p  0,475 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '43p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '44p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '47p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '46p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '48p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
-${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_8.png -p  0,525 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '50p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '51p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '53p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '54p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
+${voffset 20}${goto 55}${image $HOME/Accuweather_conky_script/temp/images/forecast_8.png -p  0,525 -s 40x36}${font}${goto 55}${voffset -20}${execi 600 sed -n '50p' $HOME/Accuweather_conky_script/temp/daily_forecast} ${execi 600 sed -n '51p' $HOME/Accuweather_conky_script/temp/daily_forecast}: ${execi 600 sed -n '54p' $HOME/Accuweather_conky_script/temp/daily_forecast}° | ${execi 600 sed -n '53p' $HOME/Accuweather_conky_script/temp/daily_forecast}°
 ${goto 55}${execi 600 sed -n '55p' $HOME/Accuweather_conky_script/temp/daily_forecast}
 
 ${voffset -5}${color2}${font Zekton:size=10:bold}${offset -1}SYSTEM ${voffset 4}${color1}${hr 2}
@@ -109,10 +111,10 @@ GPU: ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan
 " -f6 | cut -d : -f4 | cut -d . -f1)}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}NETWORK ${voffset 4}${color1}${hr 2}
-${color}${if_up wlp13s0}
-${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal${wireless_link_qual_perc wlp13s0}% ${alignr}${wireless_essid wlp13s0}
-${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp13s0}${alignr}Total:${totaldown wlp13s0}
-${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp13s0}${alignr}Total:${totalup wlp13s0}
+${color}${if_up wlan0}
+${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal ${execi 10 ~/Accuweather_conky_script/wifi-scan|grep "%"|cut -c 1-4} ${alignr}${execi 10 iw dev wlan0 link | grep SSID | cut -d " " -f 2-}
+${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlan0}${alignr}Total:${totaldown wlan0}
+${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlan0}${alignr}Total:${totalup wlan0}
 ${endif}
-${voffset -18}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Frequency${alignr}${execi 600 ~/Accuweather_conky_script/wifi-scan|grep freq|cut -c7-11}
+${voffset -18}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Frequency${alignr}${execi 10 ~/Accuweather_conky_script/wifi-scan|grep freq|cut -c7-11}
 ]];
