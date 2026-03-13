@@ -1,17 +1,17 @@
 #!/bin/bash
 
-iw dev wlan0 link|grep -E freq
+iw dev wlp11s0 link|grep -E freq
 
 # Define the range boundaries
-NUMBER=$(iw dev wlan0 link | grep "signal" | cut -c  11-12)
+NUMBER=$(iw dev wlp11s0 link | grep "signal" | cut -c  11-12)
 
 if ((NUMBER >= 1 && NUMBER <= 30 )); then
   echo "100%."
-elif ((NUMBER >= 31 && NUMBER <= 45 )); then
+elif ((NUMBER >= 31 && NUMBER <= 60 )); then
   echo "75%"
-elif ((NUMBER >= 46 && NUMBER <= 61 )); then
+elif ((NUMBER >= 61 && NUMBER <= 70 )); then
   echo "50%"
-elif ((NUMBER >= 62 && NUMBER <= 77 )); then
+elif ((NUMBER >= 71 && NUMBER <= 80 )); then
   echo "25%"
 else
   echo "The number $NUMBER is outside the defined ranges."

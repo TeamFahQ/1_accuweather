@@ -111,10 +111,10 @@ GPU: ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan
 " -f6 | cut -d : -f4 | cut -d . -f1)}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}NETWORK ${voffset 4}${color1}${hr 2}
-${color}${if_up wlan0}
-${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal ${execi 10 ~/Accuweather_conky_script/wifi-scan|grep "%"|cut -c 1-4} ${alignr}${execi 10 iw dev wlan0 link | grep SSID | cut -d " " -f 2-}
-${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlan0}${alignr}Total:${totaldown wlan0}
-${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlan0}${alignr}Total:${totalup wlan0}
+${color}${if_up wlp11s0}
+${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal ${execi 10 ~/Accuweather_conky_script/wifi-scan|grep "%"|cut -c 1-4} ${alignr}${execi 10 iw dev wlp11s0 link | grep SSID | cut -d " " -f 2-}
+${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp11s0}${alignr}Total:${totaldown wlp11s0}
+${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp11s0}${alignr}Total:${totalup wlp11s0}
 ${endif}
 ${voffset -18}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Frequency${alignr}${execi 10 ~/Accuweather_conky_script/wifi-scan|grep freq|cut -c7-11}
 ]];
