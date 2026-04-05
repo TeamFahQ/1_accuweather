@@ -1,4 +1,10 @@
-ba601c9 Thomas Raines 2025-11-12 Changelog Update
+a38d425 Thomas Raines 2026-04-04 Update image names in conjunction with accuweatehr changes
+fd08cba Thomas Raines 2026-04-04 update daily forecast to align with accuweather changes
+e7b6f3a Thomas Raines 2026-04-04 adjust parameters for wifi signal strength
+ac894a7 Thomas Raines 2026-03-13 Removed .lua experiments
+cd6cccf Thomas Raines 2026-03-13 Tweaking wifi parameters for better data output
+f006f74 Thomas Raines 2026-03-12 So many things here. Updates based of hardware changes, experiments, and fix images not displaying
+6b3139e Thomas Raines 2025-11-12 Changelog Update
 4d9027c Thomas Raines 2025-11-12 conky_functions: Use pkill to reload conky
 ea9565a Thomas Raines 2025-11-12 Myconkyrc: Change interval to run frequency script
 d361438 Thomas Raines 2025-11-11 Changelog udpate

@@ -5,9 +5,9 @@ iw dev wlp11s0 link|grep -E freq
 # Define the range boundaries
 NUMBER=$(iw dev wlp11s0 link | grep "signal" | cut -c  11-12)
 
-if ((NUMBER >= 1 && NUMBER <= 30 )); then
+if ((NUMBER >= 30 && NUMBER <= 50 )); then
   echo "100%."
-elif ((NUMBER >= 31 && NUMBER <= 60 )); then
+elif ((NUMBER >= 51 && NUMBER <= 60 )); then
   echo "75%"
 elif ((NUMBER >= 61 && NUMBER <= 70 )); then
   echo "50%"

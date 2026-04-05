@@ -324,7 +324,7 @@ sleep 0.2
 	curr_addr="$(echo $address|sed 's/weather-forecast.*$//')"current-weather/"$last_number"
 	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/temp/curr_cond_raw "$curr_addr"
 
-	daily_addr="$(echo $address|sed 's/weather-forecast.*$//')"daily-weather-forecast/"$last_number"
+	daily_addr="$(echo $address|sed 's/weather-forecast.*$//')"10-day-weather-forecast/"$last_number"
 	curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0' -o $HOME/Accuweather_conky_script/temp/daily_forecast_raw "$daily_addr"
 
 ##### del image forecast
