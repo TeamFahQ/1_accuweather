@@ -106,15 +106,13 @@ ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}TEMPS & FANS ${vof
 ${color}${font}${voffset -2}CPU: ${execi 2 (sensors | grep -A 0 'CPU:'|cut -c16-21)}C${alignc}${alignr}CPU/Pump:${execi 2  (sensors -f| grep -A 0 'CPU Fan'|cut -c13-17)}/${execi 2  (sensors -f| grep -A 0 'Pump'|cut -c13-17)}
 Rear:${execi 2 (sensors -f|grep -m 1 'Rear'|cut -c13-17)}${alignc}${alignr}F-Top:${execi 2 (sensors -f|grep -m 1 'F-Top'|cut -c13-17)}
 F-Mid:${execi 2 (sensors -f|grep -m 1 'F-Mid'|cut -c13-17)}${alignc}${alignr}F-Low:${execi 2 (sensors -f|grep -m 1 'F-Low:'|cut -c13-17)}
-GPU: ${execi 2 bash $HOME/Accuweather_conky_script/NVIDIA/gpu-c} °C${alignr}Fan: ${execi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
-" -f2 | cut -d : -f4 | cut -d . -f1)}/${execi 2 (nvidia-settings -q /GPUCurrentFanSpeedRPM | cut -d "
-" -f6 | cut -d : -f4 | cut -d . -f1)}
+GPU: ${execi 2 sensors | grep junction | cut -c 16-19} °C${alignr}Fan: ${execi 2 sensors | grep fan1 | cut -c 14-21}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}${offset -1}NETWORK ${voffset 4}${color1}${hr 2}
-${color}${if_up wlp11s0}
-${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal ${execi 10 ~/Accuweather_conky_script/wifi-scan|grep "%"|cut -c 1-4} ${alignr}${execi 10 iw dev wlp11s0 link | grep SSID | cut -d " " -f 2-}
-${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp11s0}${alignr}Total:${totaldown wlp11s0}
-${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp11s0}${alignr}Total:${totalup wlp11s0}
+${color}${if_up wlp13s0}
+${voffset -25}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Signal ${execi 10 ~/Accuweather_conky_script/wifi-scan|grep "%"|cut -c 1-4} ${alignr}${execi 10 iw dev wlp13s0 link | grep SSID | cut -d " " -f 2-}
+${voffset -1}${font VariShapes Solid:size=12}Q${font}${goto 32}${voffset -3}Download:${downspeed wlp13s0}${alignr}Total:${totaldown wlp13s0}
+${voffset -1}${font VariShapes Solid:size=12}q${font}${goto 32}${voffset -3}Upload:${upspeed wlp13s0}${alignr}Total:${totalup wlp13s0}
 ${endif}
 ${voffset -18}${font Poky:size=12}Y${font}${goto 32}${voffset -1}Frequency${alignr}${execi 10 ~/Accuweather_conky_script/wifi-scan|grep freq|cut -c7-11}
 ]];
