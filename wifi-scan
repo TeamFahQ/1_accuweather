@@ -1,9 +1,9 @@
 #!/bin/bash
 
-iw dev wlp11s0 link|grep -E freq
+iw dev wlp13s0 link|grep -E freq
 
 # Define the range boundaries
-NUMBER=$(iw dev wlp11s0 link | grep "signal" | cut -c  11-12)
+NUMBER=$(iw dev wlp13s0 link | grep "signal" | cut -c  11-12)
 
 if ((NUMBER >= 30 && NUMBER <= 50 )); then
   echo "100%."
