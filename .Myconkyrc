@@ -88,7 +88,7 @@ ${goto 55}${execi 600 sed -n '55p' $HOME/Accuweather_conky_script/temp/daily_for
 
 ${voffset -5}${color2}${font Zekton:size=10:bold}${offset -1}SYSTEM ${voffset 4}${color1}${hr 2}
 ${color}${voffset 2}${offset -2}${font OpenLogos:size=12}Z${voffset -4}${font}${offset 3}${sysname}${offset 3}${kernel}  ${machine}
-${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI GeForce RTX 4070 Gaming X
+${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}XFX Merc ${exec lspci -k | grep Radeon|cut -c84-93,99-105} OC
 ${voffset 2}${font StyleBats:size=10}A${voffset -1}${font}${offset 5}MSI ${exec cat /sys/devices/virtual/dmi/id/board_name|cut -c1-21}
 
 ${voffset -15}${color2}${font Zekton:size=10:bold}Ryzen 9 7900X ${freq_g 0}Ghz ${voffset 4}${color1}${hr 2}
